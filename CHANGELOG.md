@@ -2,6 +2,13 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.43
+
+### Fixed
+
+- The Verify step never answers with nothing. When no judge is handed out,
+  the reply says why and which command to run next.
+
 ## 12.0.0-beta.42
 
 ### Fixed
