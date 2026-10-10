@@ -13,7 +13,7 @@ Verify starts by itself when the last slice is built. Agents that did not write 
 Verify runs six named checks. The first two run side by side, and so do the fourth and fifth:
 
 1. **Polish:** removes near-copies and dead code, adds missing tests, updates the docs and, for a screen, compares it with its design. It never hunts for bugs.
-2. **Security review,** when the change crosses a trust boundary: sign-in, secrets or outside input. It only reads.
+2. **Security review,** when the change crosses a trust boundary: sign-in, secrets or outside input. It only reads. What Polish changes beside it is read once more, before the project checks.
 3. **Project checks:** your tests, types, lint and build, run once and recorded by QualityLayer. A result is reused when the code and the environment have not changed.
 4. **Independent review:** agents that did not write the code prove every **Done means** point on the running program.
 5. **Second opinion,** when the change is risky: the other coding agent reads what was built, hunting for what would break. By default it runs only on risky changes; [Settings](../reference/settings.md#second-opinion) can make it always.

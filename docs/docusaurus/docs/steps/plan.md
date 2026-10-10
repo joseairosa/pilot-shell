@@ -18,13 +18,15 @@ Review the complete Plan, including its diagrams, designs and reasoning:
 4. **Done means**, from [Discuss](discuss.md): review the proposed results and their reasoning. Your final Plan approval covers these criteria together with the Plan.
 5. **Decided by you** and **Decisions made for you:** your answers from Discuss and Research, then the smaller choices your agent took, each with its reason. Ask your agent to explain or revise any of them.
 6. **Not doing** and **Before the build:** what the build will leave alone, and what must be in place before it starts, such as a login only you can provide.
-7. **How we will know it works:** the one check that tells whether the whole change works, and the expected size.
+7. **How we will know it works:** the one check that tells whether the whole change works, the expected size, and one line that says whether the change is risky and why. A risky change gets the other agent's second opinion once it is built.
 
 The Plan asks no batch of questions. A choice that appears only once a design is drawn sits inside the Plan as **Your call**, with two options, a recommendation and the design; there are at most two, and **Approve Plan** stays locked until each is settled. **Your turn** focuses one explicitly asked choice at a time. Open the document context when you need it. Each answer reaches your agent immediately and is recorded at the passage it settled. Technical review findings return to the planning agent to fix or answer; only a new ambiguous or hard choice needing your judgement becomes a question.
 
 In a focused decision card, **1–9** selects the matching answer and **←/→** moves between decisions. **Enter** sends your words; **Shift+Enter** adds a line. Choice shortcuts leave typing fields and text composition alone, and do not run with **⌘**, **Ctrl** or **Alt**.
 
 Once the real choices are answered, the complete Plan appears in the main pane. Use **Approve Plan** at the top right to approve it once, covering the proposed criteria, decisions and design together. **Give feedback** opens a place to write and send the changes you want. Approval waits while required reviewer work is still being processed; answering a question does not approve the Plan.
+
+Beside **Approve Plan**, a line such as "Verify about $6.10 and 25 min" says what the checks after the build will cost and take. It is worked out from your earlier tasks on this computer, at list price, and opens to show each check and what a fix round would add. Before you have an earlier task, there is no line.
 
 ## Read the Plan full size {#full-size}
 
