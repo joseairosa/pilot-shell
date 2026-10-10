@@ -2,6 +2,14 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.48
+
+### Fixed
+
+- When two builds commit to the same branch, the final review lists only
+  this task's files under its slices, and its header counts only this
+  task's files and commits. The other build's files stay under Not doing.
+
 ## 12.0.0-beta.47
 
 ### Fixed
