@@ -2,6 +2,13 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.47
+
+### Fixed
+
+- After a fix round, the first request for the independent judge hands the
+  judge out at once. It used to take a second, identical request.
+
 ## 12.0.0-beta.46
 
 ### Fixed
