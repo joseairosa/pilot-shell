@@ -2,7 +2,7 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
-## 12.0.0-beta.36
+## 12.0.0-beta.34
 
 ### New
 
