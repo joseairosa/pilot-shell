@@ -2,6 +2,36 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.36
+
+### New
+
+- The Plan says in one line whether the change is risky, and why. You read
+  it under **How we will know it works** before you approve, and it decides
+  whether the other agent reads the built change. A word in the Risks
+  section no longer buys that second opinion by accident.
+- Beside **Approve Plan**, the Plan shows what Verify will cost and take,
+  for example "Verify about $6.10 and 25 min". It comes from your earlier
+  tasks on this computer; open it to see each check and what a fix round
+  would add. Before you have an earlier task, nothing is shown.
+- When Polish changes code beside the Security review, the review reads what
+  Polish changed once more before the project checks. Its result says so, for
+  example "read Polish's 2 commits once more: nothing new".
+- A small change skips the Polish helper and the cold read of its Outline:
+  at most two slices, nothing risky, no trust boundary and no screen change.
+  The build session reads the whole change once instead, and Verify shows
+  Polish as "skipped · light task". Say `+polish` or `+cold-read` to bring
+  them back.
+
+### Good to know
+
+- A product-level Discuss batch may hold eight questions, with the four
+  product questions first, instead of being refused at the eighth.
+- The Plan step's task list shows the Outline work written while you read the
+  Plan.
+- A comment you leave on the Outline after planning has stopped reaches the
+  build's first step and is answered there.
+
 ## 12.0.0-beta.33
 
 ### Fixed
