@@ -2,6 +2,14 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.49
+
+### Fixed
+
+- QualityLayer remembers which commits it made for each task. When another
+  build, even one QualityLayer does not run, commits to the same branch,
+  its files no longer appear under your task's slices in the final review.
+
 ## 12.0.0-beta.48
 
 ### Fixed
