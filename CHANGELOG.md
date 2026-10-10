@@ -8,6 +8,10 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
 - The Verify step never answers with nothing. When no judge is handed out,
   the reply says why and which command to run next.
+- A build that reaches its limit of fix rounds goes on by itself for one
+  more round when the last round fixed something. It only stops to ask you
+  when the fixes stop landing, so an unattended build does not wait hours
+  on one click.
 
 ## 12.0.0-beta.42
 
