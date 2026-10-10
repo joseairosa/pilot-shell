@@ -2,6 +2,14 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.46
+
+### Fixed
+
+- A build that an earlier version had already moved on to Verify after
+  **One more round** now goes back to its fix helper too, instead of asking
+  for a judge on unchanged code.
+
 ## 12.0.0-beta.45
 
 ### Fixed
