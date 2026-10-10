@@ -2,6 +2,14 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.44
+
+### Fixed
+
+- A build already waiting at its fix-round limit when you updated takes the
+  automatic extra round too, when its last round fixed something, instead
+  of waiting for your click.
+
 ## 12.0.0-beta.43
 
 ### Fixed
