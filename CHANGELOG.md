@@ -2,6 +2,15 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.45
+
+### Fixed
+
+- **One more round** at the fix-round limit now hands the open failures to a
+  fix helper before the build is judged again. Before, it judged the same
+  unchanged code once more. When QualityLayer takes that round by itself,
+  it says so instead of saying you chose it.
+
 ## 12.0.0-beta.44
 
 ### Fixed
