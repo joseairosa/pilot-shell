@@ -12,7 +12,7 @@ Verify starts by itself when the last slice is built. Agents that did not write 
 
 Verify runs six named checks. The first two run side by side, and so do the fourth and fifth:
 
-1. **Polish:** removes near-copies and dead code, adds missing tests, updates the docs and, for a screen, compares it with its design. It never hunts for bugs.
+1. **Polish:** removes near-copies and dead code, adds missing tests, updates the docs and, for a screen, compares it with its design. It never hunts for bugs. A small change skips it and says so: the Polish lane reads "skipped · light task", and the agent that built the change read the whole diff once more before the checks. That is a Plan of one or two slices with no trust boundary, nothing risky and no screen.
 2. **Security review,** when the change crosses a trust boundary: sign-in, secrets or outside input. It only reads. What Polish changes beside it is read once more, before the project checks.
 3. **Project checks:** your tests, types, lint and build, run once and recorded by QualityLayer. A result is reused when the code and the environment have not changed.
 4. **Independent review:** agents that did not write the code prove every **Done means** point on the running program.

@@ -41,7 +41,7 @@ One switch: tell me when something needs me, or a task ships or stops. A second 
 
 ## For one task {#for-one-task}
 
-Say it to your agent in words, such as "skip security", "run a checkpoint after every slice" or "no second opinion". No setting turns an approval off.
+Say it to your agent in words, such as "skip security", "run a checkpoint after every slice" or "no second opinion". A small change (a Plan of one or two slices with no trust boundary, nothing risky and no screen) skips Polish and the cold read of its Outline; say "polish" or "cold read" to bring either back. No setting turns an approval off.
 
 ## Licence
 
