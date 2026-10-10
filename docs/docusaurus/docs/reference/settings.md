@@ -29,7 +29,7 @@ On every task, an agent that never wrote the code decides whether the finished c
 With Claude Code and Codex both installed, the other agent reviews your work. Two selects say when:
 
 - **On the Plan:** **Always** (recommended) or **When risky**. The review reads the Discuss, Research and Plan documents, not code, and starts with the first full draft. Your agent folds the findings in before you are told the Plan is ready, so you approve a reviewed Plan.
-- **On the built change:** **When risky** (recommended) or **Always**. It is the sixth check in [Verify](../steps/verify.md#lanes). A change is risky when it crosses a trust boundary, when the Plan's risks name a new dependency, an outside system or a migration, or when the Outline marks a slice risky.
+- **On the built change:** **When risky** (recommended) or **Always**. It is the sixth check in [Verify](../steps/verify.md#lanes). A change is risky when the Plan's Risky line says so, when it crosses a trust boundary, or when the Outline marks a slice risky.
 
 Pick the model for each direction here, or turn it off; a task that asks for one still gets it.
 
