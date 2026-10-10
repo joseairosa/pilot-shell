@@ -31,11 +31,13 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
   cannot be read no longer takes the server down or breaks the task list.
   The failure goes to `crash.log` in `~/.qualitylayer`, one line each, with
   tokens, quoted text and document lines left out.
-- The `~/.qualitylayer` folder no longer grows without a limit. Once a day,
-  and by hand with `qualitylayer retention sweep`, cost detail older than
-  three calendar months is folded into a total per task (every cost figure
-  reads the same), and idle live sessions, old session bindings, old cost
-  offsets and the old part of long check logs are removed.
+- The `~/.qualitylayer` folder grows far more slowly. Once a day, and by
+  hand with `qualitylayer retention sweep`, cost detail older than three
+  calendar months is folded into a total per task (every cost figure reads
+  the same), and idle live sessions, old session bindings, old cost offsets
+  and the old part of long check logs are removed. The current month's cost
+  detail is not folded yet, so it can still grow past the size limit within
+  that month.
 - Opening a task no longer waits for GitHub. A shipped task shows its pull
   request as "reading checks" until the answer arrives, and the server reads
   each task document once per change instead of on every request.
