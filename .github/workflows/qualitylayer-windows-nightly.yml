@@ -68,6 +68,8 @@ jobs:
         working-directory: qualitylayer
         env:
           QUALITYLAYER_REQUIRE_RENDER: "1"
+          # Bun has no native Windows ARM build: the runner emulates x64, so times are not held there.
+          QUALITYLAYER_EMULATED_CPU: ${{ matrix.os == 'windows-11-arm' && '1' || '0' }}
         run: bun run test --shard ${{ matrix.shard }}/16 tests/e2e tests/windows tests/core/platform.test.ts tests/core/team-keys.test.ts tests/server/lock.test.ts tests/cli/hook-prompt.test.ts tests/core/install/mod.test.ts tests/scripts/chrome-shutdown.test.ts
 
       - name: Measure native compilation tradeoffs

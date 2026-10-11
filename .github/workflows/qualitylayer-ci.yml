@@ -194,10 +194,12 @@ jobs:
         working-directory: docs/site
         run: npm test
 
-  # Every push runs the Windows-specific suites and a short end-to-end smoke set natively on both
-  # Windows runners, split so each job ends within ten minutes. The full end-to-end suite runs on
-  # Linux and macOS above on every push, and on Windows nightly in qualitylayer-windows-nightly.yml
-  # (CLI calls that start Windows PowerShell make it far slower there than one push should wait).
+  # Every push runs the Windows-specific suites and a short end-to-end smoke set natively on
+  # windows-2025, split so each job ends within ten minutes. The full end-to-end suite runs on
+  # Linux and macOS above on every push, and on both Windows runners nightly in
+  # qualitylayer-windows-nightly.yml. The ARM runner is nightly only: Bun has no native Windows
+  # ARM build, so it tests the x64 binary under emulation, slowly; the release's native Windows
+  # job runs the real arm64 binary on it.
   windows:
     name: Native Windows runtime (${{ matrix.os }}, shard ${{ matrix.shard }}/6)
     runs-on: ${{ matrix.os }}
@@ -206,7 +208,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-2025, windows-11-arm]
+        os: [windows-2025]
         shard: [1, 2, 3, 4, 5, 6]
         # Fixed groups of about the same length; only group 4 needs the site's packages.
         include:
