@@ -2,6 +2,14 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.50
+
+### Fixed
+
+- When the final approval waits for you and you are away, the agent stops
+  after the wait times out instead of starting the wait over and over. You
+  pick the task up with `qualitylayer` when you are back.
+
 ## 12.0.0-beta.49
 
 ### Fixed
