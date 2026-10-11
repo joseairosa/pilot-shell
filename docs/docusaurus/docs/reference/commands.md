@@ -60,6 +60,7 @@ You rarely type these; they are what you see in your agent's chat.
 | Command | What it does |
 | --- | --- |
 | `qualitylayer next` | Start a task, or get the next step of the open one; it also brings new comments on designs |
+| `qualitylayer next --implement` | The same as `next --task <task>` without a task name: build the one approved Plan, or list the approved Plans that wait and stop. It is what `/ql implement` runs |
 | `qualitylayer next done` | Finish the current step. In [Discuss](../steps/discuss.md) and [Research](../steps/research.md) it checks the document and moves on; in the [Outline](../steps/outline.md) it checks that every **Done means** point has a scenario and moves to Implement |
 | `qualitylayer question ask` | Ask you a question in the App and wait for your answer; the terminal shows one line meanwhile |
 | `qualitylayer question ask --batch` | Ask a batch. Only Discuss and Research may ask one (the Plan only a **Your call**, at most two). A batch has 3 to 6 questions, or 1 to 2 with a reason; more than 7 is refused. Batches are counted per step: a second needs no reason, a third in the same step does, and a fourth is refused. The reply says which batch of the step it is |
@@ -77,10 +78,13 @@ You rarely type these; they are what you see in your agent's chat.
 | `qualitylayer gate open 03-plan.md` · `gate open final` | Put the Plan or the finished change up for your approval (`02-plan.md` for a task started before the seven steps) |
 | `qualitylayer plan amend` · `outline amend` | Record a change to the Plan or the Outline made after the Plan was approved, the Outline step included, with the reason; it reaches the final review. Only the build session runs it: a helper reports the change and the session records it |
 | `qualitylayer plan amend --for T<n> --add-file <path>` | Put a file on a task card's Files (repeat `--add-file` for several) and record it, so adding a file to a card is not a hand edit; it needs a note and names one task |
+| `qualitylayer plan amend --add-file T<n>:<path>` | The same with the task named in each `--add-file`: files for any number of cards in one call, recorded as one amendment |
 | `qualitylayer research fold` | Write Research's **Findings** and **Code references** from the reports the current research helpers saved, in the order they were started. A second run replaces that text and leaves the planner's own words |
 | `qualitylayer handover` · `handover --push` | Hand an approved Plan to your team: write its approval record and commit the task's files, then list the commits that would go. `--push` pushes the branch and, with a Team plan, lists the task for your teammates. It is the terminal's way to the **Hand over** button |
 | `qualitylayer attest handover "<what the person said>"` | On a teammate's machine without a Team plan, record that you build from the approval on this branch. The first `qualitylayer next` there asks you for it |
 | `qualitylayer check slice <n>` | Run a slice's approved checks and record them |
+| `qualitylayer check failed` | Rerun only the test files that failed in the last full run, with the fast project checks; `--background` runs it detached |
+| `qualitylayer commit fix` | Commit the files this task's sessions edited since the latest fix helper was handed out, the way `commit slice` commits a slice; `--message` and `--take-staged` work as there |
 | `qualitylayer comments take` | Collect the comments not yet answered |
 | `qualitylayer ask list` · `ask answer` · `ask draft` | A teammate's agent reads and answers a question; see [Teammates' agents](../team/agents.md) |
 
