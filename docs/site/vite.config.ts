@@ -45,7 +45,13 @@ export default defineConfig(({ mode }) => ({
     port: 8080,
     fs: { allow: [__dirname, path.resolve(__dirname, "../../qualitylayer/src"), path.resolve(__dirname, "../../qualitylayer/node_modules")] },
     // The release list is an edge function in production; in development it comes from the live site, so the cards download directly.
-    proxy: { "/app/downloads.json": { target: "https://qualitylayer.dev", changeOrigin: true } },
+    proxy: {
+      "/app/downloads.json": { target: "https://qualitylayer.dev", changeOrigin: true },
+      ...(process.env.QUALITYLAYER_BILLING_DEV_PROXY ? {
+        "/api/billing": { target: process.env.QUALITYLAYER_BILLING_DEV_PROXY },
+        "/__billing-fixture__": { target: process.env.QUALITYLAYER_BILLING_DEV_PROXY },
+      } : {}),
+    },
   },
   plugins: [
     cockpitDemo(),

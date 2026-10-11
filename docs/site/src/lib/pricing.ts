@@ -81,7 +81,6 @@ export const PLANS: Plan[] = [
     ],
   },
 ];
-
 /** A cell: included, not included, or available when a company asks for it. */
 export type Cell = boolean | "request";
 export type CompareRow = { feature: string; solo: Cell; team: Cell; enterprise: Cell; note?: string };
@@ -179,7 +178,3 @@ export const COMPARE: CompareGroup[] = [
     ],
   },
 ];
-
-/** The overlay checkout is loaded in production only; elsewhere the link opens Polar in a new tab. */
-export const USE_EMBED_CHECKOUT =
-  import.meta.env.PROD && !import.meta.env.VITE_POLAR_PORTAL_URL?.includes("sandbox");

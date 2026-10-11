@@ -12,11 +12,13 @@ const Shared = lazy(() => import("./pages/Shared"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const Open = lazy(() => import("./pages/Open"));
 const Download = lazy(() => import("./pages/Download"));
+const Billing = lazy(() => import("./pages/Billing"));
+const CheckoutSuccess = lazy(() => import("./pages/CheckoutSuccess"));
 
 /** Page statistics everywhere but on the page a Slack DM opens, which reads its link and sends nothing. */
 export const Metrics = () => {
   const { pathname } = useLocation();
-  if (pathname.startsWith("/open/")) return null;
+  if (pathname.startsWith("/open/") || pathname === "/billing" || pathname.startsWith("/checkout/")) return null;
   return (
     <>
       <Analytics />
@@ -34,6 +36,8 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/pricing" element={<Pricing />} />
+          <Route path="/billing" element={<Billing />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/s/:id" element={<Shared />} />
           <Route path="/open/*" element={<Open />} />
           <Route path="/download" element={<Download />} />
