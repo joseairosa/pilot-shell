@@ -10,10 +10,12 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
   it under **How we will know it works** before you approve, and it decides
   whether the other agent reads the built change. A word in the Risks
   section no longer buys that second opinion by accident.
-- Beside **Approve Plan**, the Plan shows what Verify will cost and take,
-  for example "Verify about $6.10 and 25 min". It comes from your earlier
-  tasks on this computer; open it to see each check and what a fix round
-  would add. Before you have an earlier task, nothing is shown.
+- Setup has a new step: pick **Product** or **Engineering**, the level you
+  work at. Change it any time in **Settings › Workflow**. At Product a new
+  task starts as a product brief, and Discuss and the Plan read in product
+  words with the engineering sections folded away. At Engineering nothing
+  changes. The task header names the level and switches how one task reads
+  on your computer.
 - When Polish changes code beside the Security review, the review reads what
   Polish changed once more before the project checks. Its result says so, for
   example "read Polish's 2 commits once more: nothing new".

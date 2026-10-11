@@ -35,6 +35,8 @@ Under the approval card, the page reads **The change, top to bottom**, in one fi
 5. **How it was checked:** the checks that ran, the steps to try it yourself and what could not be checked.
 6. **Ship:** the branch, the pull request's target and the security findings.
 
+At the **Product** level the page reads as a release note: why, what the user gets, what was left alone and how it was checked. **Built, slice by slice** folds to its headline. See [two levels](../intro.md#two-levels).
+
 QualityLayer draws this from the task's records, so your agent writes nothing extra for it. The live status at the top shows what the agent is working on; when nothing waits for you, the agent's turn takes the card's place.
 
 Review is `07-review.md`. Its first sections become the pull request's description: **Why the change**, **What a reviewer must know**, **What changed**, the three sections QualityLayer writes from the records (**Built, slice by slice**, **What was asked for, and how each point was proved** and **Deliberately not changed**), **How it was verified**, **Try it yourself** and any security findings. After them come what was decided while building and what you settled. The **More in this document** strip lists the sections the page does not draw, and the description as GitHub receives it opens from **Files › Records**.

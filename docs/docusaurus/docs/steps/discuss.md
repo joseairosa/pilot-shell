@@ -35,6 +35,8 @@ When the change is one small, clear edit, the App says "Too small for a plan" an
 
 When no ticket says what to build, the Discuss document grows into a PRD: the success measure, the first release and what is left out. **Copy** exports it to share with your team.
 
+At the **Product** level every new feature starts as this brief, whatever the request says, and Discuss asks in two batches. The first settles the foundation: whether the problem reads right, how success is measured and which first release. The second, written from those answers, asks what the user sees, the behaviour and what is left out, with a wireframe of each screen that changes. The choices use product words, with no code names. A bug keeps its bug table. See [two levels](../intro.md#two-levels).
+
 ## A bug {#a-bug}
 
 For a bug, you agree on when it happens, what goes wrong, what should happen and what must keep working. Your agent reproduces it and finds the cause in [Research](research.md), before anything is planned; that document is titled **Why it breaks**.

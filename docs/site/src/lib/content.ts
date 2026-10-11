@@ -38,6 +38,10 @@ export const FAQS: Faq[] = [
     "QualityLayer is for medium and large changes. When a request is too small for it, the agent writes a prompt for your plain agent and offers to run it. A bug takes the same steps, starting with its cause.",
   ),
   faq(
+    "Is it for product managers as well as engineers?",
+    "Yes. Pick Product or Engineering at Setup, and change it any time in Settings › Workflow. With Product, a new feature starts as a product brief. Discuss settles the problem, how success is measured and the first release before it asks what the user sees, and the Plan reads in product words with the engineering sections folded away. With Engineering, the seven steps read as they always did. The task header names each task's level and switches how one task reads on your computer.",
+  ),
+  faq(
     "What does it cost to run?",
     "Your agents’ own usage, on your subscription. The App shows the estimated cost of each step.",
   ),

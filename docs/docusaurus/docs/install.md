@@ -15,7 +15,7 @@ A computer with a screen gets the **QualityLayer App**. A machine without one (W
 
 ## On your computer
 
-**[Download the App](https://qualitylayer.dev/download)** and open it. The first start is one checklist: your licence (or a 7-day trial), the CLI, and your agents. **Open QualityLayer** turns on once one agent is ready.
+**[Download the App](https://qualitylayer.dev/download)** and open it. The first start is one checklist: your licence (or a 7-day trial), the CLI, your agents, and the level you work at, **Product** or **Engineering**. **Open QualityLayer** turns on once one agent is ready; without a pick, Engineering applies. Change the level any time in **Settings › Workflow**; [what each level changes](intro.md#two-levels).
 
 On Windows, you can also install it from PowerShell: `irm https://qualitylayer.dev/install.ps1 | iex`. This installs the App and the command line.
 

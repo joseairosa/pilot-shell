@@ -2,6 +2,8 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import { FAQS } from "./content";
+import { CHAPTERS } from "./tour";
 
 /**
  * The flow asks every question in the App, the approvals included, and the agent's terminal shows
@@ -109,6 +111,32 @@ describe("the flow in the copy: asked and answered in the App", () => {
   it("names no command that opens the App from Claude Code", () => {
     const offending = [readme, ...docPages, ...homeCopy, homeIndex].filter((path) => !path.endsWith("changelog.md") && /\/ql-app\b/.test(read(path)));
     expect(offending).toEqual([]);
+  });
+
+  it("names the two levels in the tour and the FAQ, with where each is picked and switched", () => {
+    const discuss = CHAPTERS.find((chapter) => chapter.id === "discuss");
+    const tour = [discuss?.title, discuss?.text, ...(discuss?.bullets ?? [])].join(" ");
+    const faq = FAQS.map((entry) => `${entry.question} ${entry.answer}`).join(" ");
+    for (const [name, text] of Object.entries({ "tour's Discuss chapter": tour, FAQ: faq })) {
+      expect(text, name).toMatch(/\bProduct\b/);
+      expect(text, name).toMatch(/\bEngineering\b/);
+      expect(text, name).toMatch(/\bSetup\b/);
+      expect(text, name).toMatch(/Settings › Workflow/);
+    }
+    expect(faq).toMatch(/task header/i);
+  });
+
+  it("gives the README and the docs' intro a part on the two levels that says where to pick and switch", () => {
+    for (const path of [readme, join(docs, "intro.md")]) {
+      const text = read(path);
+      const name = path.replace(`${repo}/`, "");
+      const part = (text.split(/^#{2,3} Two levels\s*$/m)[1] ?? "").split(/^#{1,3} /m)[0] ?? "";
+      expect(part, name).toMatch(/\bProduct\b/);
+      expect(part, name).toMatch(/\bEngineering\b/);
+      expect(part, name).toMatch(/\bSetup\b/);
+      expect(part, name).toMatch(/Settings › Workflow/);
+      expect(part, name).toMatch(/task header/i);
+    }
   });
 
   it("documents ql as the only installed command beginning with ql", () => {

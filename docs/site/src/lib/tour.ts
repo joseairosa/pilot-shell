@@ -45,7 +45,7 @@ export const CHAPTERS: Chapter[] = [
     act: { id: "steps", title: "From your request to a pull request", text: "On your own or with your team, a change goes through the same seven steps. You decide where a decision is needed, and your agents do the rest." },
     title: "Your agent asks one batch until the goal is clear",
     text: "Describe the change in your own words. Questions arrive together in Your turn as one batch of three to six, each with a recommendation. Answer in any order; each answer reaches your agent at once, while it keeps reading the code.",
-    bullets: ["A bug is reproduced and its cause found", "Too small for a plan? You get a ready prompt", "Each answer becomes part of Done means"],
+    bullets: ["A bug is reproduced and its cause found", "Too small for a plan? You get a ready prompt", "Each answer becomes part of Done means", "Product or Engineering: pick it at Setup, change it in Settings › Workflow"],
   },
   {
     id: "research",

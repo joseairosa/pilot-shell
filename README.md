@@ -201,6 +201,15 @@ Each step writes one Markdown file in the task's folder, from `01-discuss.md` to
 
 QualityLayer works on the branch and worktree you have checked out and never switches them.
 
+### Two levels
+
+Pick **Product** or **Engineering** once, at **Setup**, and change it any time in **Settings › Workflow**. The task header names each task's level and switches how that one task reads on your computer.
+
+- **Product** (product owners, product managers, leadership): a new feature starts as a product brief. Discuss settles the problem, how success is measured and the first release, then asks what the user sees, with a wireframe of each screen that changes. Discuss and the Plan read in product words, and the engineering sections fold under **More in this document**.
+- **Engineering**: the seven steps read as they always did, with every working section open. It applies when you pick nothing.
+
+Both levels take the same seven steps and write the same seven files.
+
 ### Built test first, checked by other agents
 
 QualityLayer records every test run itself, with its exit code, so a passing claim always has a run behind it. A slice the plan marks risky gets a checkpoint: its scenarios run on the real program. A failure goes to an agent to fix and never stops the build. Whatever stays open reaches the final review.

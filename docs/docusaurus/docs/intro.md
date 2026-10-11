@@ -50,6 +50,15 @@ Medium to large changes in a repository you care about, on your own or with your
 
 It works with Claude Code and Codex, in the terminal, their desktop apps or your IDE, and with [any other agent](agents/other.md) that runs shell commands. Your agent writes the code, on the subscription you already have.
 
+### Two levels
+
+You pick the level you work at once, at **Setup** on the first start, and change it any time in **Settings › Workflow**. The task header names each task's level and switches how that one task reads on your computer, without changing what you approved.
+
+- **Product** is for product owners, product managers and leadership. A new feature starts as a product brief. Discuss settles the problem, how success is measured and the first release before it asks what the user sees, with a wireframe of each screen that changes. Discuss and the Plan read in product words, and the engineering sections fold under **More in this document**.
+- **Engineering** is for engineers. The seven steps read as they always did, with every working section open. It applies when you pick nothing.
+
+Both levels take the same seven steps and write the same seven files. The level changes what a new task starts from and what each page puts first, never the steps.
+
 ## Coming from plan mode in your IDE {#from-plan-mode}
 
 If you use Claude's plan mode in PhpStorm or VS Code, you can keep reading each change in the IDE's diff. QualityLayer adds these steps around that work:
