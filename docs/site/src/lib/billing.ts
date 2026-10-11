@@ -7,7 +7,7 @@ export type Subscription = {
 export type BillingAccount = {
   email: string; subscriptions: Subscription[];
   paymentMethods: { id: string; label: string; isDefault: boolean }[];
-  invoices: { id: string; number: string; date: string; amount: number; currency: string }[];
+  invoices: { id: string; number: string; date: string; amount: number; currency: string; receiptAvailable: boolean }[];
   licences: { id: string; key: string; label: string; status: string }[];
   seats: { subscriptionId: string; total: number; seats: { id: string; email: string; status: string }[] }[];
 };
