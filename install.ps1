@@ -672,10 +672,12 @@ $qlAsset = "qualitylayer-windows-$qlCpu.exe"
 $qlWanted = { param($qlTag) if ($CliOnly) { $qlAsset } else { "QualityLayer-$($qlTag -replace '^v', '')-$qlCpu-setup.exe" } }
 $qlWork = Join-Path ([IO.Path]::GetTempPath()) ("qualitylayer-install-" + [Guid]::NewGuid().ToString('N'))
 [IO.Directory]::CreateDirectory($qlWork) | Out-Null
+$script:qlKeepWork = $false
 
 # Confirm-SignedSums: the release's SHA256SUMS and its signature, fetched once, and the signature
 # checked against the key built into this script before any line of the sums is trusted.
 $script:qlSums = $null
+$script:qlVerifiedHashes = @{}
 function Confirm-SignedSums {
     if ($script:qlSums) { return }
     $qlKeygen = Get-Command ssh-keygen -CommandType Application -ErrorAction SilentlyContinue | Select-Object -First 1
@@ -716,6 +718,161 @@ function Save-Verified([string]$Name, [string]$Destination) {
     if ($qlExpected -notmatch '^[0-9a-fA-F]{64}$') { throw "SHA256SUMS holds no checksum for $Name; nothing was installed." }
     $qlActual = (Get-FileHash -LiteralPath $Destination -Algorithm SHA256).Hash
     if ($qlExpected -ne $qlActual) { throw 'Checksum mismatch; nothing was installed.' }
+    # Remove the download marker only after authenticating this exact file.
+    Unblock-File -LiteralPath $Destination -ErrorAction Stop
+    $script:qlVerifiedHashes[$Destination] = $qlActual
+}
+
+function Get-QlNativePowerShell {
+    $native = Join-Path $env:SystemRoot 'Sysnative\WindowsPowerShell\v1.0\powershell.exe'
+    if (Test-Path -LiteralPath $native -PathType Leaf) { return $native }
+    return (Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe')
+}
+
+function Test-QlSetupAsrBlock([string]$Setup, [datetime]$Since) {
+    # Match event data, not a translated message or an enabled rule alone.
+    try {
+        $events = @(Get-WinEvent -FilterHashtable @{
+            LogName = 'Microsoft-Windows-Windows Defender/Operational'
+            Id = 1121
+            StartTime = $Since
+        } -MaxEvents 100 -ErrorAction Stop)
+        foreach ($event in $events) {
+            [xml]$xml = $event.ToXml()
+            foreach ($data in $xml.Event.EventData.Data) {
+                if ($data.Name -in @('Path', 'Involved File') -and $data.InnerText -ieq $Setup) { return $true }
+            }
+        }
+    } catch { return $false }
+    return $false
+}
+
+function Get-QlSetupRepairScript {
+    # The elevated helper owns the temporary exception and removes it even if its caller exits.
+    return @'
+param([string]$SetupPath, [string]$ExpectedHash, [string]$StatePath, [int]$ParentId, [long]$ParentStartTicks)
+$ErrorActionPreference = 'Stop'
+$owned = $false
+$problem = $null
+function Write-SetupState([string]$Name, $Value) {
+    $file = Join-Path $StatePath $Name
+    [IO.File]::WriteAllText(($file + '.tmp'), ($Value | ConvertTo-Json -Compress))
+    Move-Item -LiteralPath ($file + '.tmp') -Destination $file -Force
+}
+try {
+    if ((Get-FileHash -LiteralPath $SetupPath -Algorithm SHA256).Hash -ne $ExpectedHash) {
+        throw 'The verified setup file changed; no exception was added.'
+    }
+    $existing = @((Get-MpPreference -ErrorAction Stop).AttackSurfaceReductionOnlyExclusions)
+    if ($SetupPath -notin $existing) {
+        # The path is unique to this download. Even a partially failed addition needs cleanup.
+        $owned = $true
+        Add-MpPreference -AttackSurfaceReductionOnlyExclusions $SetupPath -ErrorAction Stop
+    }
+    if ($SetupPath -notin @((Get-MpPreference -ErrorAction Stop).AttackSurfaceReductionOnlyExclusions)) {
+        throw 'Defender did not retain the temporary exception. A device policy may prevent this change.'
+    }
+    Write-SetupState 'ready.json' @{ ready = $true }
+    $deadline = (Get-Date).AddMinutes(15)
+    while (-not (Test-Path -LiteralPath (Join-Path $StatePath 'done'))) {
+        $parent = $null
+        try {
+            $parent = [Diagnostics.Process]::GetProcessById($ParentId)
+            if ($parent.StartTime.Ticks -ne $ParentStartTicks -or $parent.HasExited) { break }
+        } catch { break } finally { if ($null -ne $parent) { $parent.Dispose() } }
+        if ((Get-Date) -ge $deadline) { throw 'The setup recovery timed out.' }
+        Start-Sleep -Milliseconds 250
+    }
+} catch { $problem = $_.Exception.Message } finally {
+    if ($owned) {
+        try {
+            Remove-MpPreference -AttackSurfaceReductionOnlyExclusions $SetupPath -ErrorAction Stop
+            if ($SetupPath -in @((Get-MpPreference -ErrorAction Stop).AttackSurfaceReductionOnlyExclusions)) {
+                throw 'Defender did not remove the temporary exception.'
+            }
+        } catch { $problem = "$problem Temporary exception cleanup failed: $($_.Exception.Message) Path: $SetupPath" }
+    }
+    Write-SetupState 'result.json' @{ error = $problem }
+}
+'@
+}
+
+function Invoke-QlSetupRepair([string]$Setup, [string]$Arguments) {
+    Write-Host "Defender attack surface reduction blocked the verified setup: $Setup"
+    Write-Host 'Recovery temporarily allows this setup file through ASR rules. Antivirus scanning stays enabled.'
+    Write-Host 'Windows will ask for administrator approval. Setup still installs for your current user.'
+    if ((Read-Host 'Allow the temporary setup exception? [y/N]') -notmatch '^(?i)y(es)?$') {
+        throw 'Setup recovery was declined; Windows security settings were not changed.'
+    }
+    $state = Join-Path $qlWork 'setup-recovery'
+    [IO.Directory]::CreateDirectory($state) | Out-Null
+    $helper = Join-Path $state 'repair.ps1'
+    [IO.File]::WriteAllText($helper, (Get-QlSetupRepairScript))
+    $hash = $script:qlVerifiedHashes[$Setup]
+    if ($hash -notmatch '^[0-9a-fA-F]{64}$') { throw 'Setup recovery requires a verified release checksum.' }
+    $parent = [Diagnostics.Process]::GetCurrentProcess()
+    try { $ticks = $parent.StartTime.Ticks } finally { $parent.Dispose() }
+    $repairArguments = '-NoLogo -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File "' + $helper +
+        '" -SetupPath "' + $Setup + '" -ExpectedHash ' + $hash + ' -StatePath "' + $state +
+        '" -ParentId ' + $PID + ' -ParentStartTicks ' + $ticks
+    $repair = $null
+    try {
+        $repair = Start-Process -FilePath (Get-QlNativePowerShell) -ArgumentList $repairArguments -Verb RunAs -PassThru -ErrorAction Stop
+        $deadline = (Get-Date).AddSeconds(30)
+        while (-not (Test-Path -LiteralPath (Join-Path $state 'ready.json'))) {
+            if (Test-Path -LiteralPath (Join-Path $state 'result.json')) {
+                $result = Get-Content -LiteralPath (Join-Path $state 'result.json') -Raw | ConvertFrom-Json
+                throw "Setup recovery failed: $($result.error)"
+            }
+            if ($repair.HasExited -or (Get-Date) -ge $deadline) { throw 'Windows did not complete setup recovery.' }
+            Start-Sleep -Milliseconds 100
+        }
+        # Only the security helper elevates; the original user starts the per-user setup.
+        return (Start-Process -FilePath $Setup -ArgumentList $Arguments -Wait -PassThru -ErrorAction Stop)
+    } finally {
+        [IO.File]::WriteAllText((Join-Path $state 'done'), '')
+        if ($null -ne $repair) {
+            try {
+                if (-not $repair.WaitForExit(30000)) { throw 'The setup recovery helper did not finish cleanup.' }
+                if (-not (Test-Path -LiteralPath (Join-Path $state 'result.json'))) { throw 'Setup recovery cleanup could not be verified.' }
+                $result = Get-Content -LiteralPath (Join-Path $state 'result.json') -Raw | ConvertFrom-Json
+                if ($result.error) { throw $result.error }
+            } catch {
+                $script:qlKeepWork = $true
+                Write-Warning "Setup recovery needs attention: $($_.Exception.Message) Recovery files: $state"
+                throw
+            } finally { $repair.Dispose() }
+        }
+    }
+}
+
+function Start-QlSetup([string]$Setup, [string]$InstallDirectory, [bool]$Quiet) {
+    # NSIS consumes the whole unquoted /D value, including spaces; /D must be last.
+    $arguments = "/S /D=$InstallDirectory"
+    $since = (Get-Date).AddSeconds(-1)
+    try { return (Start-Process -FilePath $Setup -ArgumentList $arguments -Wait -PassThru -ErrorAction Stop) } catch {
+        $failure = $_
+        $exception = $_.Exception
+        $denied = $false
+        while ($null -ne $exception) {
+            if (($exception -is [ComponentModel.Win32Exception] -and $exception.NativeErrorCode -eq 5) -or
+                $exception -is [UnauthorizedAccessException]) { $denied = $true }
+            $exception = $exception.InnerException
+        }
+        if (-not $denied) { throw }
+        $asr = $false
+        for ($attempt = 0; $attempt -lt 3 -and -not $asr; $attempt++) {
+            if ($attempt -gt 0) { Start-Sleep -Milliseconds 250 }
+            $asr = Test-QlSetupAsrBlock $Setup $since
+        }
+        if (-not $asr) {
+            throw "Windows denied access to the verified setup: $Setup. Check Windows Security Protection history or your device administrator's application policy. No confirmed Defender ASR block was found, so security settings were not changed. Windows reported: $($failure.Exception.Message)"
+        }
+        if ($Quiet) {
+            throw "Defender ASR blocked the verified setup: $Setup. Run the installer in an interactive terminal to approve a temporary setup exception, or ask your device administrator to allow the published QualityLayer setup."
+        }
+        return (Invoke-QlSetupRepair $Setup $arguments)
+    }
 }
 
 try {
@@ -752,8 +909,7 @@ try {
         Write-Host 'Checksum verified (SHA-256)'
         $qlLocal = if ($env:LOCALAPPDATA) { $env:LOCALAPPDATA } else { Join-Path (Join-Path $qlHome 'AppData') 'Local' }
         $qlApp = Join-Path (Join-Path $qlLocal 'Programs') 'QualityLayer'
-        # The setup installs for this user only. /D names the folder and must come last.
-        $qlSetupRun = Start-Process -FilePath $qlSetup -ArgumentList @('/S', "/D=$qlApp") -Wait -PassThru
+        $qlSetupRun = Start-QlSetup $qlSetup $qlApp $qlQuiet
         if ($qlSetupRun.ExitCode -ne 0) { throw "The QualityLayer App's setup failed (exit $($qlSetupRun.ExitCode))." }
         $qlCli = Join-Path $qlApp 'qualitylayer-cli.exe'
         if (-not (Test-Path -LiteralPath $qlCli -PathType Leaf)) { throw "The App's command line is missing: $qlCli" }
@@ -762,9 +918,7 @@ try {
         # ASR check before invoking a CLI that Defender might otherwise prevent from starting.
         $qlRepair = Join-Path $qlApp 'QualityLayer-Windows-Repair.ps1'
         if (-not $qlQuiet -and (Test-Path -LiteralPath $qlRepair -PathType Leaf)) {
-            $qlPowerShell = Join-Path $env:SystemRoot 'System32\WindowsPowerShell\v1.0\powershell.exe'
-            $qlNativePowerShell = Join-Path $env:SystemRoot 'Sysnative\WindowsPowerShell\v1.0\powershell.exe'
-            if (Test-Path -LiteralPath $qlNativePowerShell -PathType Leaf) { $qlPowerShell = $qlNativePowerShell }
+            $qlPowerShell = Get-QlNativePowerShell
             # A separate process keeps -WindowStyle Hidden from hiding the caller's console.
             $qlRepairArguments = '-NoLogo -NoProfile -ExecutionPolicy Bypass -File "' + $qlRepair + '" -Automatic'
             $qlRepairRun = Start-Process -FilePath $qlPowerShell -ArgumentList $qlRepairArguments -WindowStyle Hidden -Wait -PassThru
@@ -785,5 +939,5 @@ try {
     # Current terminal only; the installer prints the command to add to a PowerShell profile.
     if (($env:Path -split ';') -notcontains $qlBinDir) { $env:Path = "$qlBinDir;$env:Path" }
 } finally {
-    Remove-Item -LiteralPath $qlWork -Recurse -Force -ErrorAction SilentlyContinue
+    if (-not $script:qlKeepWork) { Remove-Item -LiteralPath $qlWork -Recurse -Force -ErrorAction SilentlyContinue }
 }

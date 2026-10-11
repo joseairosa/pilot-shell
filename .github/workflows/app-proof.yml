@@ -172,7 +172,7 @@ jobs:
       - name: The Windows installer
         if: runner.os == 'Windows' && hashFiles('qualitylayer/tests/windows/install-ps1.test.ts') != ''
         working-directory: qualitylayer
-        run: bun run test tests/windows/install-ps1.test.ts
+        run: bun run test tests/windows/install-ps1.test.ts tests/windows/setup-recovery.test.ts
 
       - name: Install, start, call and update the App
         id: prove
