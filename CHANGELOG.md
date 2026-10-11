@@ -26,7 +26,9 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
   from the helpers' saved reports, `qualitylayer design new --wire` starts a
   wireframe, and a new design page starts with your product's colours and
   fonts. Each design of the Plan is checked by a fresh helper.
-- `qualitylayer commit fix` commits what a fix helper changed.
+- `qualitylayer commit fix` commits what a fix helper changed, and a task card
+  can name an approved design page (`**Design:** page <name>`) for its helper
+  to open.
 - Naming QualityLayer in your words, typos included, and asking it to plan
   or build starts it; "Implement this using QualityLayer" starts the build
   of the one approved Plan waiting for it. Without the name nothing starts.
@@ -35,6 +37,14 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
 - The band says **needs you** only when you can act: an open question, a
   gate or a need.
+- **Settings › Workflow** shows the level you picked at Setup at once, without
+  a reload.
+- A `/ql` shown as an example in a brief or a README, or quoted in another
+  session's message, no longer starts the workflow.
+- A step document that exists but is still empty shows that it is being
+  written, not a blank page.
+- A fix round closes without a code change only on points only you can
+  settle; a point it left open leaves the final review once a judge passes it.
 - A step page opens on its document; the progress of the checks lives in
   the header's panel.
 - The cost chip takes the width of its words, the step strip clips no step,
