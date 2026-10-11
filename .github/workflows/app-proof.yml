@@ -25,7 +25,15 @@ name: App proof
       - "qualitylayer/tests/app/**"
       - "qualitylayer/tests/proof/**"
       - "qualitylayer/tests/helpers/screen.ts"
+      - "qualitylayer/tests/helpers/measure.ts"
       - "qualitylayer/tests/windows/**"
+      # The server files that decide how it starts, how it crashes and what it costs idle.
+      - "qualitylayer/src/server/serve.ts"
+      - "qualitylayer/src/server/lock.ts"
+      - "qualitylayer/src/server/orphan.ts"
+      - "qualitylayer/src/server/watch.ts"
+      - "qualitylayer/src/server/crash.ts"
+      - "qualitylayer/src/core/retention.ts"
       - "install.sh"
       - "install.ps1"
   workflow_dispatch:

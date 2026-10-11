@@ -2,6 +2,57 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.51
+
+### New
+
+- The Plan says in one line whether the change is risky, and why. You read
+  it under **How we will know it works** before you approve, and it decides
+  whether the other agent reads the built change. A word in the Risks
+  section no longer buys that second opinion by accident.
+- Beside **Approve Plan**, the Plan shows what Verify will cost and take,
+  for example "Verify about $6.10 and 25 min". It comes from your earlier
+  tasks on this computer; open it to see each check and what a fix round
+  would add. Before you have an earlier task, nothing is shown.
+- When Polish changes code beside the Security review, the review reads what
+  Polish changed once more before the project checks. Its result says so, for
+  example "read Polish's 2 commits once more: nothing new".
+- A small change skips the Polish helper and the cold read of its Outline:
+  at most two slices, nothing risky, no trust boundary and no screen change.
+  The build session reads the whole change once instead, and Verify shows
+  Polish as "skipped · light task". Say `+polish` or `+cold-read` to bring
+  them back.
+
+### Fixed
+
+- When the server under the App stops, the App notices within about two
+  seconds, starts a new one and stays on the page you had open.
+- A request that fails, a stray error in the background or one task that
+  cannot be read no longer takes the server down or breaks the task list.
+  The failure goes to `crash.log` in `~/.qualitylayer`, one line each, with
+  tokens, quoted text and document lines left out.
+- The `~/.qualitylayer` folder grows far more slowly. Once a day, and by
+  hand with `qualitylayer retention sweep`, cost detail older than three
+  calendar months is folded into a total per task (every cost figure reads
+  the same), and idle live sessions, old session bindings, old cost offsets
+  and the old part of long check logs are removed. The current month's cost
+  detail is not folded yet, so it can still grow past the size limit within
+  that month.
+- Opening a task no longer waits for GitHub. A shipped task shows its pull
+  request as "reading checks" until the answer arrives, and the server reads
+  each task document once per change instead of on every request.
+
+### Good to know
+
+- While an App window is open and a shipped task waits to merge, the server
+  asks GitHub about its pull request once a minute.
+- A product-level Discuss batch may hold eight questions, with the four
+  product questions first, instead of being refused at the eighth.
+- The Plan step's task list shows the Outline work written while you read the
+  Plan.
+- A comment you leave on the Outline after planning has stopped reaches the
+  build's first step and is answered there.
+
 ## 12.0.0-beta.50
 
 ### Fixed
