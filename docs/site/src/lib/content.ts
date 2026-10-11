@@ -22,10 +22,6 @@ const team = priced("team");
 
 export const FAQS: Faq[] = [
   faq(
-    "Does it replace my coding agent?",
-    "No. Claude Code or Codex still writes the code, with the subscription you already have. QualityLayer adds the plan you approve, the tests, the checks by agents that did not write the code, and the App that shows what each decision is about.",
-  ),
-  faq(
     "Can I use it on my own, or only with a team?",
     "On your own. One developer goes through every step: Discuss, Research, Plan, Outline, Implement, Verify and Review. A Team plan adds questions to teammates, Slack messages, and reviewing a change together.",
   ),
@@ -48,14 +44,6 @@ export const FAQS: Faq[] = [
   faq(
     "Does my code leave my computer?",
     "Your coding agent sends code to its provider under your existing data settings. QualityLayer keeps your plans and designs on your computer. Sharing sends the plan and its progress, encrypted on your machine; it does not send your code or the design page. A screenshot you attach to a feedback report can show code, so check it before sending.",
-  ),
-  faq(
-    "What does Send feedback share?",
-    "A report goes to QualityLayer as a private issue, with your text and the screenshots you add. Diagnostics are on by default, and you see them before you send. They name the versions of the App, the command line, Claude Code and Codex, your system and its architecture, the kind of page you were on and your licence. They also count the errors of the last hour by kind. They never include your code, the text of a plan or document, task titles, repository or branch names, or file paths. Screenshots can show code or plans.",
-  ),
-  faq(
-    "Which agents work with it?",
-    "Claude Code and Codex, in the terminal, their desktop apps or your IDE. For another coding agent, the App copies a prompt you can hand it.",
   ),
   faq(
     "I use Pilot Shell today. What happens?",

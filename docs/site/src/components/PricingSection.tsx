@@ -7,7 +7,7 @@ import { OFFLINE_DAYS } from "@/lib/product";
 import { COMPARE, PLANS, type Cell, type Hue, type Plan } from "@/lib/pricing";
 import { Link } from "react-router-dom";
 
-const HUE: Record<Hue, string> = { plan: "var(--hl-violet)", build: "var(--ql-accent)", verify: "var(--hl-teal)", review: "var(--ql-amber-ink)" };
+const HUE: Record<Hue, string> = { plan: "var(--mx-ink)", build: "var(--mx-ink)", verify: "var(--mx-ink)", review: "var(--mx-ink)" };
 const hue = (h: Hue) => ({ "--g": HUE[h] }) as CSSProperties;
 
 type Billing = "monthly" | "yearly";
@@ -55,6 +55,7 @@ const PricingSection = () => {
             <Button type="button" variant={billing === "monthly" ? "default" : "ghost"} aria-pressed={billing === "monthly"} onClick={() => setBilling("monthly")}>Monthly</Button>
             <Button type="button" variant={billing === "yearly" ? "default" : "ghost"} aria-pressed={billing === "yearly"} onClick={() => setBilling("yearly")}>Yearly <span className="pr-save">Save 20%</span></Button>
           </div>
+          <p className="pr-account-link">Already subscribed? <Link to="/billing">Manage billing</Link></p>
           <div className="pr-plans">
             {PLANS.map((plan) => (
               <article key={plan.id} className="pr-plan" aria-labelledby={`${plan.id}-h`}>
