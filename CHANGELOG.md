@@ -16,6 +16,13 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
   words with the engineering sections folded away. At Engineering nothing
   changes. The task header names the level and switches how one task reads
   on your computer.
+- You can hand an approved Plan to a teammate. **Hand over** on the start card
+  (or `qualitylayer handover --push`) pushes the branch with its approval
+  record, the first teammate to build it claims it, and the final approval
+  comes back to you.
+- `qualitylayer research fold` writes Research's Findings and Code references
+  from the helpers' saved reports, and `qualitylayer design new --wire` starts
+  a wireframe.
 - When Polish changes code beside the Security review, the review reads what
   Polish changed once more before the project checks. Its result says so, for
   example "read Polish's 2 commits once more: nothing new".

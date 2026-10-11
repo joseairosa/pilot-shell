@@ -22,6 +22,14 @@ A wrong scope or a weak decision is caught while it is still a plan, when a comm
 
 An ask can be **needed before approval** or **opinion only**. **Remind** nudges a late answer.
 
+## Hand over an approved Plan {#hand-over}
+
+Once you have approved the Plan, a teammate can build it. On the start card, **Hand over** commits the task's files and an approval record on your task's branch and pushes the branch. From the terminal, `qualitylayer handover` shows the commits that would go and `qualitylayer handover --push` sends them. Nothing is pushed until you click or pass `--push`. The base branch cannot be handed over, and a Plan that is not approved, or changed since you approved it, is refused.
+
+With a Team plan the task also appears in your teammates' task list, with the command that checks the branch out. The first teammate to run `qualitylayer next` on that branch claims it; a second machine is told who already has it. Without a Team plan, the teammate's agent first asks them to confirm that they build from your approval.
+
+A Plan edited after your approval is not taken, and the reply names the lines that moved. When the build is done, the final approval goes to you, the person who approved the Plan, not to the builder.
+
 ## Slack {#slack}
 
 Your team owner connects Slack once, in **Settings › Team**. From then on, teammates get a direct message when something waits for them: a question, an answer, or a build that finished. Messages go out only when a person can act.
