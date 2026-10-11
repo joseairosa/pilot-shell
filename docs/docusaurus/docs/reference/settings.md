@@ -10,6 +10,15 @@ Open **Settings** with the gear at the bottom of the App's sidebar. Changes save
 
 ## Workflow
 
+### Level {#level}
+
+Where new tasks start, as two cards; picking one saves it at once.
+
+- **Product:** a task starts as a product brief. Its documents read in product words, with the engineering details folded away.
+- **Engineering:** a task starts with the full technical plan: contracts, files and tests in view.
+
+It applies to new tasks. Each task keeps its level; switch one task from its header. See [Two levels](../intro.md#two-levels).
+
 ### Planning and Build defaults {#defaults}
 
 Two cards, one agent at a time: a tab each for **Claude Code**, **Codex** and **Another agent**. The tab marked **Default** is the one **+ New** and Implement Start open on; **Make default** moves the mark, so you can plan with Claude Code and build with Codex.
@@ -45,7 +54,7 @@ Say it to your agent in words, such as "skip security", "run a checkpoint after 
 
 ## Licence
 
-Your plan or the days left of your trial, and a link to the customer portal for invoices, seats and payment. **On another computer** shows the command that moves your licence.
+Your plan or the days left of your trial, and **Open billing account**: your subscription, invoices, receipts and payment method on qualitylayer.dev, with the Polar portal beside it. **On another computer** shows the command that moves your licence.
 
 This tab also explains the licence check, workflow-text requests and update checks that contact QualityLayer. The App sends no usage events. Optional sharing and feedback are separate; see [Files and privacy](files.md#privacy).
 

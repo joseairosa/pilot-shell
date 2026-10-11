@@ -17,7 +17,7 @@ Verify runs six named checks. The first two run side by side, and so do the four
 3. **Project checks:** your tests, types, lint and build, run once and recorded by QualityLayer. A result is reused when the code and the environment have not changed.
 4. **Independent review:** agents that did not write the code prove every **Done means** point on the running program.
 5. **Second opinion,** when the change is risky: the other coding agent reads what was built, hunting for what would break. By default it runs only on risky changes; [Settings](../reference/settings.md#second-opinion) can make it always.
-6. **Fix rounds:** one agent per round fixes everything found at once, and only what failed or was touched is checked again.
+6. **Fix rounds:** one agent per round fixes everything found at once, and only what failed or was touched is checked again: one judge for up to twelve such points, never more judges than the first round had. A share that only re-reads recorded checks runs on the helpers' model. When the Plan's **Risky** line says none, only the failed points are checked again.
 
 The page shows these lanes in the order they run, each with who does it, a short line and its result; open one for its full text.
 

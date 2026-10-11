@@ -2,6 +2,69 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.52
+
+### New
+
+- Setup has a new step: pick **Product** or **Engineering**, the level you
+  work at. Change it any time in **Settings › Workflow**, where each level is
+  one card with one sentence. At Product a new task starts as a product
+  brief, and Discuss and the Plan read in product words with the engineering
+  sections folded away; Discuss shows a wireframe beside *What the user
+  sees*. At Engineering nothing changes. Each task keeps its level: the task
+  header names it and switches how that task reads on your computer.
+- You can hand an approved Plan to a teammate. **Hand over** on the start card
+  (or `qualitylayer handover --push`) pushes the branch with its approval
+  record, the team space lists the task, the first teammate to build it
+  claims it, and the final approval comes back to you.
+- A re-check after a fix round costs what it needs: one judge per twelve
+  points that failed or that the fix touched, never more than the first
+  round had, and a share that only re-reads recorded checks runs on the
+  helpers' model. When the Plan's **Risky:** line says none, only the failed
+  points are checked again.
+- `qualitylayer research fold` writes Research's Findings and Code references
+  from the helpers' saved reports, `qualitylayer design new --wire` starts a
+  wireframe, and a new design page starts with your product's colours and
+  fonts. Each design of the Plan is checked by a fresh helper.
+- `qualitylayer commit fix` commits what a fix helper changed.
+- Naming QualityLayer in your words, typos included, and asking it to plan
+  or build starts it; "Implement this using QualityLayer" starts the build
+  of the one approved Plan waiting for it. Without the name nothing starts.
+
+### Fixed
+
+- The band says **needs you** only when you can act: an open question, a
+  gate or a need.
+- A step page opens on its document; the progress of the checks lives in
+  the header's panel.
+- The cost chip takes the width of its words, the step strip clips no step,
+  and the Claude 5 models are priced.
+- A folded section shows once, folded where it stands, and the Reader dims
+  it.
+- Two slices built side by side never share a file, and the Outline says how
+  wide the build runs.
+- During a build: a fix helper is handed out once; a fix for one slice no
+  longer holds back the others; a slice check that was given up after four
+  fixes reaches the final review; one wait reports every finished check
+  once; a check command changed by an amendment no longer holds its slice,
+  and a reply that hands out nothing says what holds the build.
+- A read-only shell command, or a write into your home folder, is no longer
+  reported as an edit of the repository.
+- A commit waits a few seconds when another session holds git's index lock
+  instead of leaving the index behind.
+- Home keeps the team's last good answer when the team space cannot be
+  reached.
+
+### Good to know
+
+- The Plan no longer shows a forecast of Verify's cost beside **Approve
+  Plan**.
+- During a build the whole test suite runs at fixed points only (when every
+  task is built and in Verify); in between, only what failed and each new
+  slice's own checks run again.
+- **Settings › Licence** opens your billing account on qualitylayer.dev,
+  with your invoices, receipts and payment method.
+
 ## 12.0.0-beta.51
 
 ### New
@@ -10,19 +73,10 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
   it under **How we will know it works** before you approve, and it decides
   whether the other agent reads the built change. A word in the Risks
   section no longer buys that second opinion by accident.
-- Setup has a new step: pick **Product** or **Engineering**, the level you
-  work at. Change it any time in **Settings › Workflow**. At Product a new
-  task starts as a product brief, and Discuss and the Plan read in product
-  words with the engineering sections folded away. At Engineering nothing
-  changes. The task header names the level and switches how one task reads
-  on your computer.
-- You can hand an approved Plan to a teammate. **Hand over** on the start card
-  (or `qualitylayer handover --push`) pushes the branch with its approval
-  record, the first teammate to build it claims it, and the final approval
-  comes back to you.
-- `qualitylayer research fold` writes Research's Findings and Code references
-  from the helpers' saved reports, and `qualitylayer design new --wire` starts
-  a wireframe.
+- Beside **Approve Plan**, the Plan shows what Verify will cost and take,
+  for example "Verify about $6.10 and 25 min". It comes from your earlier
+  tasks on this computer; open it to see each check and what a fix round
+  would add. Before you have an earlier task, nothing is shown.
 - When Polish changes code beside the Security review, the review reads what
   Polish changed once more before the project checks. Its result says so, for
   example "read Polish's 2 commits once more: nothing new".
