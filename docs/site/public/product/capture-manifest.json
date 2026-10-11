@@ -1,0 +1,164 @@
+{
+  "fixtureHash": "191a7e17eb3df0d69bac17b2c0b8e4f1decbd2f6192b1cf10d0b71a5babf98a4",
+  "capturedAt": "2026-10-11T21:07:58.157Z",
+  "scenes": [
+    "discuss",
+    "research",
+    "plan",
+    "outline",
+    "implement",
+    "verify",
+    "review",
+    "pull-request",
+    "design",
+    "team",
+    "home",
+    "setup"
+  ],
+  "images": [
+    {
+      "file": "discuss-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "1bc45056324b9e539ee29f81bec82b45f5a6b267aa1faf20c33e07a16151ae43"
+    },
+    {
+      "file": "research-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "5afdecc02331c1430f9002a569e06b497e6d9331ef39d54ae56382e2b8d8785b"
+    },
+    {
+      "file": "plan-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "d0662e0464ec30f169f931ae457dc5abe3b38399ec361b24bcf7ebd6cab1be58"
+    },
+    {
+      "file": "outline-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "a48983ba7302d4c4d685afa0f9becd8f816474a31b4d47c986121a08fb5b1085"
+    },
+    {
+      "file": "implement-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "064df0d4c7be59d27d56c49ea0a14e5bf9f30476cfb2925604963b91a2827f6a"
+    },
+    {
+      "file": "verify-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "bad9653128626d11213666e7738319e760180b5225eeca0c1afbe635285cde1c"
+    },
+    {
+      "file": "review-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "c5ea59fe72391ed1390fc112d68c30398700fb6b6589d214ce664042181c3d73"
+    },
+    {
+      "file": "pull-request-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "3c7e988ac1e575655291084316b20c66d18d356a43446b562ffef2e5bf827630"
+    },
+    {
+      "file": "design-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "66dbc6bcc6a7c6edac2ed3657bb4e4f58e8e7487dbec94ae0752bf66736ab2f9"
+    },
+    {
+      "file": "team-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "9c54e7d83bded34669f1000b113b31e71a83886f738aafa635f025f307ae6318"
+    },
+    {
+      "file": "home-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "75c79ed5c3b73c4263ee05314f920210bde61d9541bd7c46035f8393b3ce9afd"
+    },
+    {
+      "file": "setup-light.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "a23bd3407803737dceee151b437c158ff115328fc7f46f3d2f8ec07ca0e9f1a3"
+    },
+    {
+      "file": "discuss-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "237d068b997bfb070a9cd7639e3c465bf22ce53ea3acfba79c740382945fcfaa"
+    },
+    {
+      "file": "research-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "3a3c8fe409bf55f59047ad33b60dcfa8f4daf170fbdcf99dc9640ec10fab6e06"
+    },
+    {
+      "file": "plan-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "f5bf170a189cb7ff602577878e9c37c21ae09cd48f94d2bc9647ad6084325481"
+    },
+    {
+      "file": "outline-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "5449142787ffb0f5b47cf4269d98d280042a924ac62692febe8408a4e936ef3b"
+    },
+    {
+      "file": "implement-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "477f34c502895d8ad4b8cc2c6d83cee7594a3cfc60a6cf4a359d61b02f7dbda7"
+    },
+    {
+      "file": "verify-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "2cc2e78264a75f7969500549a69da2e92298573ae211bb4d99211c7a6ed6ec00"
+    },
+    {
+      "file": "review-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "0c186889c40f7e9281d011ae962642bdd6b937ee1be59be2d28c4145af3d5623"
+    },
+    {
+      "file": "pull-request-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "57d008985b71c85bf1236c9ac16cdb0b187affe6c8f903e43198f9ecfa4eca69"
+    },
+    {
+      "file": "design-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "4c40552a92a7e7336176229f360c84db8f6a90dc4bbc17886a08b9dd922aec5c"
+    },
+    {
+      "file": "team-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "fc9212d8ed054e4b309d306b7110ebbfa64cc9606a1348d3dd259119f33ffd7e"
+    },
+    {
+      "file": "home-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "337cfb7108211f214fc11f9d7a664abda96886771179b708bcc94b5a8d3afb78"
+    },
+    {
+      "file": "setup-dark.webp",
+      "width": 2880,
+      "height": 1920,
+      "sha256": "3370e84bdf479a6de109e476d30a177576380625a921d0755a7f5743dfe56ff7"
+    }
+  ]
+}

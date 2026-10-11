@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { FAQS, PRICING_FAQS } from "./content";
 import { CONTACT_EMAIL, INSTALL_COMMAND, SITE_URL } from "./product";
@@ -22,12 +23,12 @@ describe("FAQ", () => {
     expect(answers).toMatch(/team/i);
   });
 
-  it("says what a feedback report sends, as the plan lists it, and what it never sends", () => {
-    const answer = FAQS.find((faq) => /feedback/i.test(faq.question))?.answer ?? "";
-    expect(answer).toMatch(/private issue/i);
-    for (const sent of [/versions of the App, the command line, Claude Code and Codex/, /your system and its architecture/, /the kind of page you were on/, /your licence/, /errors of the last hour by kind/]) expect(answer).toMatch(sent);
-    expect(answer).toMatch(/never include your code, the text of a plan or document, task titles, repository or branch names, or file paths\./);
-    expect(answer).toMatch(/Screenshots can show code or plans\./);
+  it("keeps feedback diagnostics in the privacy docs rather than the marketing FAQ", () => {
+    expect(FAQS.some((faq) => /Send feedback/i.test(faq.question))).toBe(false);
+    const docs = readFileSync(new URL("../../../docusaurus/docs/reference/files.md", import.meta.url), "utf8");
+    expect(docs).toMatch(/feedback/i);
+    expect(docs).toMatch(/screenshots/i);
+    expect(docs).toMatch(/diagnostics/i);
   });
 
   it("distinguishes the coding agent's provider from QualityLayer sharing and feedback", () => {

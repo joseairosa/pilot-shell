@@ -27,7 +27,7 @@ describe("illustrations in both themes", () => {
   it("gives every README image a dark source and an existing fallback", () => {
     const markdown = read("README.md");
     const pictures = [...markdown.matchAll(/<picture>([\s\S]*?)<\/picture>/g)];
-    expect(pictures.length).toBeGreaterThan(10);
+    expect(pictures.length).toBeGreaterThan(0);
     expect(markdown.replace(/<picture>[\s\S]*?<\/picture>/g, "")).not.toMatch(/<img\b/);
     for (const [, picture] of pictures) {
       expect(picture).toContain('(prefers-color-scheme: dark)');

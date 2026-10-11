@@ -4,7 +4,7 @@ import Questions from "@/components/Questions";
 import { useDownload } from "@/hooks/useDownload";
 import { FAQS } from "@/lib/content";
 import Intro from "./Intro";
-import Tour from "./Tour";
+import Editorial from "./Editorial";
 
 function Install() {
   const download = useDownload();
@@ -13,15 +13,14 @@ function Install() {
       <div className="mx-wrap">
         <div className="mx-end">
           <div>
-            <span aria-hidden="true" className="sx-mark" />
             <h2 id="install-h">Start with your next change</h2>
-            <p>The App sets up Claude Code and Codex on first start. Every plan starts with a 7-day trial.</p>
+            <p>On your own or with your team. The App sets up Claude Code and Codex on first start. Every plan starts with a 7-day trial.</p>
+            <p className="mx-endn">On a server, in WSL or in a container? <Link to="/download">Install the command line</Link></p>
+          </div>
             <div className="sx-ctas">
               <Button asChild size="xl">{download.direct ? <a href={download.href}>{download.label}</a> : <Link to={download.href}>{download.label}</Link>}</Button>
               <Button asChild variant="outline" size="xl"><Link to="/pricing">See pricing</Link></Button>
             </div>
-            <p className="mx-endn">On a server, in WSL or in a container? <Link to="/download">Install the command line</Link></p>
-          </div>
         </div>
       </div>
     </section>
@@ -32,7 +31,7 @@ export default function Sections() {
   return (
     <>
       <Intro />
-      <Tour />
+      <Editorial />
       <Questions faqs={FAQS} />
       <Install />
     </>

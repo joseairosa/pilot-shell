@@ -62,7 +62,7 @@
   --destructive: var(--ql-danger);
   --border: var(--ql-border);
   --input: var(--ql-border-strong);
-  --ring: var(--mx-ink);
+  --ring: var(--ql-accent);
 }
 
 @theme inline {
