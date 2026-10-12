@@ -14,7 +14,9 @@ const Footer = () => (
           <a href={CHANGELOG_URL}>Changelog</a>
           <a href={`mailto:${CONTACT_EMAIL}`}>Contact</a>
         </nav>
-        <p className="w7-legal">© 2026 QualityLayer</p>
+        <p className="w7-legal">
+          © 2026 QualityLayer · by <a href="https://www.maxritter.net/">Max Ritter</a>
+        </p>
       </div>
     </div>
   </footer>

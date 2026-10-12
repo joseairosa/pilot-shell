@@ -50,6 +50,9 @@ html{scroll-padding-top:76px}
 .w7-root .w7-ftr-nav a{color:var(--mx-ink2);text-decoration:none}
 .w7-root .w7-ftr-nav a:hover{color:var(--mx-ink)}
 .w7-legal{color:var(--mx-ink3)}
+/* The footer's author link keeps the legal line's grey; the prose link rule (`p … a:not([data-slot])`) would make it blue. */
+.w7-root .w7-ftr .w7-legal a:not([data-slot]){color:inherit;text-decoration:underline;text-decoration-color:var(--mx-line2);text-underline-offset:3px}
+.w7-root .w7-ftr .w7-legal a:not([data-slot]):hover{color:var(--mx-ink)}
 
 /* ---- Buttons: the shadcn Button (components/ui/button.tsx) draws every action; these only add what it lacks ---- */
 /* The page's link colour is unlayered and would beat the Button's Tailwind text colour on links drawn as buttons. */
