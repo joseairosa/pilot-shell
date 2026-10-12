@@ -21,6 +21,10 @@ Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
 ### Fixed
 
+- A licence key entered on a computer that has no licence yet is accepted
+  again. In beta.53 it failed with "The server could not answer this
+  request", in the App and in `qualitylayer licence activate`. The App also
+  opens right after the key is accepted instead of up to a minute later.
 - The App no longer answers "The server could not answer this request" on
   every screen when the licence check cannot read its own files. This can
   happen after a command was run with `sudo`. A file it can rebuild is
