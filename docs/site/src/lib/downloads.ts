@@ -1,9 +1,24 @@
 import { isPhone } from "@/lib/device";
+import { CHANGELOG_URL } from "@/lib/product";
 
 /** What the download page knows about the newest release and the visitor. */
 
-/** What /app/downloads.json says about the newest release: its packages with address and size in bytes. */
-export type Packages = { version: string; packages: { id: string; name: string; url: string; size: number }[] };
+/**
+ * What /app/downloads.json says about the newest release: its version, when GitHub published it
+ * (ISO 8601; absent from answers older than the field), and its packages with address and size in bytes.
+ */
+export type Packages = { version: string; published?: string | null; packages: { id: string; name: string; url: string; size: number }[] };
+
+/** The day a release was published, as the page writes it ("October 12, 2026"); null when unknown or unreadable. */
+export function releasedOn(published: string | null | undefined): string | null {
+  if (!published) return null;
+  const date = new Date(published);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric", timeZone: "UTC" });
+}
+
+/** The changelog at this version's heading; the docs give "## 12.0.0-beta.53" the id "1200-beta53". */
+export const changelogOf = (version: string) => `${CHANGELOG_URL}#${version.toLowerCase().replace(/[^a-z0-9_ -]/g, "").replace(/ /g, "-")}`;
 
 export type Card = "macos-arm64" | "macos-x64" | "windows" | "linux";
 

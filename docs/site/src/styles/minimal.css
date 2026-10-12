@@ -174,7 +174,8 @@ html:has(.mx-filmov[open]){overflow:hidden}
 .mx-share .mx-tile{background:var(--mx-panel);color:var(--ql-amber-ink);box-shadow:inset 0 0 0 1px var(--ql-amber-line)}
 .mx-share p{flex:1;margin:0;font-size:15px;line-height:1.55;color:var(--mx-ink2);text-wrap:pretty}
 .mx-share p b{color:var(--mx-ink);font-weight:500}
-.mx-share-to{flex:none;display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;border:1px dashed var(--ql-amber-line);color:var(--ql-amber-ink);font-size:13px;font-weight:500}
+.mx-share-to{flex:none;display:inline-flex;align-items:center;gap:7px;padding:4px 10px;border-radius:999px;border:1px dashed var(--ql-amber-line);color:var(--mx-ink2);font-size:13px;font-weight:500}
+.mx-share-to svg{color:var(--ql-amber-ink)}
 @media (prefers-reduced-motion:reduce){.mx-track{animation:none}}
 
 /* ---- The tour, restyled: a quiet heading, square pills, a flatter window ---- */
@@ -232,7 +233,7 @@ html:has(.mx-filmov[open]){overflow:hidden}
 .pr-seg [data-slot="button"]{height:44px;padding:0 16px;border-radius:3px;font-size:14px}
 .pr-seg [data-slot="button"][data-variant="ghost"]{color:var(--mx-ink2)}
 .pr-save{padding:2px 6px;border-radius:3px;background:var(--ql-accent-soft);color:var(--ql-accent-hover);font-size:12px;font-weight:500}
-.pr-seg [data-variant="default"] .pr-save{background:rgb(255 255 255 / 18%);color:var(--mx-btn-ink)}
+.pr-seg [data-variant="default"] .pr-save{background:transparent;box-shadow:inset 0 0 0 1px currentColor;color:var(--mx-btn-ink)}
 .pr-price{min-height:56px}
 .pr-amt{font-size:48px;font-variant-numeric:tabular-nums;color:var(--ql-accent)}
 .pr-bill{margin:-12px 0 0;min-height:22px;font-size:13.5px;color:var(--mx-ink3)}

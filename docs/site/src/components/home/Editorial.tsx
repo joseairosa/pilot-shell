@@ -74,7 +74,7 @@ function Rail({ items, active, onPick }: { items: Item[]; active: number; onPick
     <ol className="ed-rail" aria-label="The eight steps" style={{ "--done": active / (items.length - 1) } as CSSProperties}>
       {items.map((item, i) => (
         <li key={item.id}>
-          <button type="button" className="ed-rail-step" data-who={item.who} data-state={i < active ? "done" : i === active ? "on" : "next"} aria-current={i === active ? "step" : undefined} onClick={() => onPick(i)}>
+          <button type="button" className="ed-rail-step" data-who={item.who} data-state={i < active ? "done" : i === active ? "on" : "next"} aria-current={i === active ? "step" : undefined} aria-label={item.name} onClick={() => onPick(i)}>
             <span className="ed-num" aria-hidden="true">{i + 1}</span>
             <span className="ed-rail-name">{item.name}</span>
           </button>

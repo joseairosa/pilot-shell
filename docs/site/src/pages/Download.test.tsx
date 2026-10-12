@@ -1,12 +1,14 @@
 import { renderToReadableStream } from "react-dom/server.browser";
 import { describe, expect, it, vi } from "vitest";
-import { loadPackages, type Packages, sizeLabel, systemOf } from "@/lib/downloads";
+import { changelogOf, loadPackages, type Packages, releasedOn, sizeLabel, systemOf } from "@/lib/downloads";
 import { DownloadView } from "./Download";
 
 /**
  * The download page: a card per system with the visitor's own first and highlighted, each linking
  * to the package the release names and showing its size, and the command line for machines
- * without a screen. What the release holds comes from /app/downloads.json, nothing is hard-coded.
+ * without a screen. Above the cards, the release's version and publish date with links to its
+ * changelog entry and to every release on GitHub. What the release holds comes from
+ * /app/downloads.json, nothing is hard-coded.
  */
 
 const WINDOWS = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36";
@@ -17,6 +19,7 @@ const ANDROID = "Mozilla/5.0 (Linux; Android 15; Pixel 9) AppleWebKit/537.36 (KH
 const asset = (id: string, file: string, size: number) => ({ id, name: file, url: `https://github.com/maxritter/pilot-shell/releases/download/v12.0.0/${file}`, size });
 const PACKAGES: Packages = {
   version: "12.0.0",
+  published: "2026-10-12T02:10:53Z",
   packages: [
     asset("macos-arm64", "QualityLayer-12.0.0-macos-arm64.dmg", 84_300_000),
     asset("macos-x64", "QualityLayer-12.0.0-macos-x64.dmg", 88_100_000),
@@ -100,6 +103,64 @@ describe("the cards", () => {
     expect(markup).toContain("<b>Windows</b>");
     expect(markup).toContain('href="https://github.com/maxritter/pilot-shell/releases"');
     expect(markup).not.toMatch(/\d+ MB/);
+  });
+});
+
+describe("the release line", () => {
+  /** The markup of the release line, from its opening tag to the cards. */
+  const lineOf = (markup: string) => markup.slice(markup.indexOf('<div class="ap-rel"'), markup.indexOf('<div class="ap-dl"'));
+
+  it("names the version the cards download, the day it was published, its changelog entry and every release on GitHub", async () => {
+    const line = lineOf(await html(<DownloadView data={{ ...PACKAGES, version: "12.0.0-beta.53" }} system={null} />));
+    expect(line).toContain("Latest version");
+    expect(line).toContain('<b class="ap-ver">12.0.0-beta.53</b>');
+    expect(line).toContain('<time dateTime="2026-10-12T02:10:53Z">October 12, 2026</time>');
+    expect(line).toContain('href="/docs/changelog#1200-beta53"');
+    expect(line).toContain("What&#x27;s new");
+    expect(line).toContain('href="https://github.com/maxritter/pilot-shell/releases"');
+    expect(line).toContain("All releases on GitHub");
+  });
+
+  it("comes before the cards, so the version is read before a download starts", async () => {
+    const markup = await html(<DownloadView data={PACKAGES} system={null} />);
+    expect(markup.indexOf('class="ap-rel"')).toBeGreaterThan(-1);
+    expect(markup.indexOf('class="ap-rel"')).toBeLessThan(markup.indexOf('class="ap-dl"'));
+  });
+
+  it("shows the version without a date when the release list does not say when it was published", async () => {
+    const line = lineOf(await html(<DownloadView data={{ ...PACKAGES, published: undefined }} system={null} />));
+    expect(line).toContain('<b class="ap-ver">12.0.0</b>');
+    expect(line).not.toContain("released");
+    expect(line).not.toContain("<time");
+  });
+
+  it("says it is looking up the version while the release list loads, and keeps both links", async () => {
+    const line = lineOf(await html(<DownloadView data={null} system={null} loading />));
+    expect(line).toContain("Looking up the latest version");
+    expect(line).not.toContain("could not be loaded");
+    expect(line).toContain('href="/docs/changelog"');
+    expect(line).toContain('href="https://github.com/maxritter/pilot-shell/releases"');
+  });
+
+  it("says the version could not be loaded when the release list fails, and keeps both links", async () => {
+    const line = lineOf(await html(<DownloadView data={null} system={null} />));
+    expect(line).toContain("The latest version could not be loaded. The downloads below open GitHub instead.");
+    expect(line).not.toContain("Looking up");
+    expect(line).toContain('href="/docs/changelog"');
+    expect(line).toContain("All releases on GitHub");
+  });
+
+  it("writes the day in words, in UTC, and nothing for a missing or unreadable date", () => {
+    expect(releasedOn("2026-10-12T02:10:53Z")).toBe("October 12, 2026");
+    expect(releasedOn("2026-10-11T23:59:59Z")).toBe("October 11, 2026");
+    expect(releasedOn(null)).toBeNull();
+    expect(releasedOn(undefined)).toBeNull();
+    expect(releasedOn("not a date")).toBeNull();
+  });
+
+  it("links to the version's heading the way the docs name it", () => {
+    expect(changelogOf("12.0.0-beta.53")).toBe("/docs/changelog#1200-beta53");
+    expect(changelogOf("12.0.0")).toBe("/docs/changelog#1200");
   });
 });
 

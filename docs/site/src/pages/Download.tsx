@@ -3,8 +3,8 @@ import { Button } from "@/components/ui/button";
 import Page from "@/components/Page";
 import SEO from "@/components/SEO";
 import { useCopy } from "@/hooks/useCopy";
-import { type Card, loadPackages, type Packages, sizeLabel, systemOf } from "@/lib/downloads";
-import { INSTALL_COMMAND, RELEASES_URL, SITE_URL } from "@/lib/product";
+import { type Card, changelogOf, loadPackages, type Packages, releasedOn, sizeLabel, systemOf } from "@/lib/downloads";
+import { CHANGELOG_URL, INSTALL_COMMAND, RELEASES_URL, SITE_URL } from "@/lib/product";
 import "@/styles/app-pages.css";
 
 const Icon = ({ path, stroke = false }: { path: string; stroke?: boolean }) => (
@@ -33,7 +33,51 @@ export const WindowsNote = () => (
   <p className="ap-note" role="status">Your download has started. If Windows shows a SmartScreen notice, choose More info, then Run anyway.</p>
 );
 
-export function DownloadView({ data, system, windowsStarted = false }: { data: Packages | null; system: Card | null; windowsStarted?: boolean }) {
+/**
+ * Which version the cards download and when it was published, with its notes in the changelog and
+ * every release on GitHub. While the release list loads, or when it cannot be read, the line says
+ * so and the links stay.
+ */
+function ReleaseLine({ data, loading }: { data: Packages | null; loading: boolean }) {
+  const date = data ? releasedOn(data.published) : null;
+  return (
+    <div className="ap-rel">
+      <p className="ap-rel-v" aria-live="polite">
+        {data ? (
+          <>
+            <span>Latest version</span>
+            <b className="ap-ver">{data.version}</b>
+            {date !== null && data.published ? (
+              <span>
+                released <time dateTime={data.published}>{date}</time>
+              </span>
+            ) : null}
+          </>
+        ) : loading ? (
+          <span>Looking up the latest version…</span>
+        ) : (
+          <span>The latest version could not be loaded. The downloads below open GitHub instead.</span>
+        )}
+      </p>
+      <nav className="ap-rel-links" aria-label="Release notes">
+        <a href={data ? changelogOf(data.version) : CHANGELOG_URL}>What's new</a>
+        <a href={RELEASES_URL}>All releases on GitHub</a>
+      </nav>
+    </div>
+  );
+}
+
+export function DownloadView({
+  data,
+  system,
+  loading = false,
+  windowsStarted = false,
+}: {
+  data: Packages | null;
+  system: Card | null;
+  loading?: boolean;
+  windowsStarted?: boolean;
+}) {
   const { copy, state } = useCopy(INSTALL_COMMAND);
   const [windows, setWindows] = useState(windowsStarted);
   const started = (id: Card) => (id === "windows" ? () => setWindows(true) : undefined);
@@ -44,6 +88,7 @@ export function DownloadView({ data, system, windowsStarted = false }: { data: P
       <div className="w7-wrap">
         <h1 id="dl-h" className="w7-h2">Get the QualityLayer App</h1>
         <p className="w7-lead">The App and the command line your agents use, in one download. Updates download quietly and install when you restart.</p>
+        <ReleaseLine data={data} loading={loading} />
         <div className="ap-dl">
           {cards.map((card) => {
             const main = find(card.main);
@@ -88,12 +133,17 @@ export function DownloadView({ data, system, windowsStarted = false }: { data: P
 
 const Download = () => {
   const [data, setData] = useState<Packages | null>(null);
+  const [loading, setLoading] = useState(true);
   const [arch, setArch] = useState<string | undefined>(undefined);
   const system = typeof navigator === "undefined" ? null : systemOf(navigator.userAgent, arch);
 
   useEffect(() => {
     let live = true;
-    void loadPackages().then((loaded) => live && setData(loaded));
+    void loadPackages().then((loaded) => {
+      if (!live) return;
+      setData(loaded);
+      setLoading(false);
+    });
     // Only Chromium says which chip a Mac has; the others keep the Apple silicon card.
     const hints = (navigator as Navigator & { userAgentData?: { getHighEntropyValues(keys: string[]): Promise<{ architecture?: string }> } }).userAgentData;
     void hints?.getHighEntropyValues(["architecture"]).then((values) => live && setArch(values.architecture), () => undefined);
@@ -110,7 +160,7 @@ const Download = () => {
         canonicalUrl={`${SITE_URL}/download`}
       />
       <Page>
-        <DownloadView data={data} system={system} />
+        <DownloadView data={data} system={system} loading={loading} />
       </Page>
     </>
   );
