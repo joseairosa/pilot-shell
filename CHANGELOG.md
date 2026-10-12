@@ -2,6 +2,40 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.54
+
+### New
+
+- Home before your first task is new: pick your agent (Claude Code, Codex or
+  another) and copy the exact command to start a task, or start from one of
+  three example requests. Below it are the seven steps and what happens after
+  the command.
+- **Show me around** walks you through the App on an example task in seven
+  stops: the steps, Your turn, the documents and designs, your task list,
+  finding and filtering, and starting a new task. Esc ends it at any time.
+- When the final approval is asked as a question and a pull request can be
+  opened, you can pick **Approve and open a pull request** or **Approve
+  only**.
+- When something waits for you, the agent's reply ends with "🔔 Your turn:
+  open the QualityLayer App."
+
+### Fixed
+
+- The App no longer answers "The server could not answer this request" on
+  every screen when the licence check cannot read its own files. This can
+  happen after a command was run with `sudo`. A file it can rebuild is
+  replaced. Otherwise the App shows "The licence could not be checked", gives
+  the command that hands the files back, and offers **Try again**. A licence
+  file that cannot be read is never replaced by a trial.
+- A new trial starts again on a computer that kept QualityLayer's workflow
+  files but lost its licence. Before, it was refused as if the clock had been
+  turned back.
+- Setup repairs the App's pointer when it is missing, so the status line no
+  longer reads "Status unavailable".
+- Teammates' questions no longer use up the team's hourly allowance when you
+  switch back to the App often. If the allowance does run out, Home says when
+  the questions come back instead of showing an error.
+
 ## 12.0.0-beta.53
 
 ### Fixed
