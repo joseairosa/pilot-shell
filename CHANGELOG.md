@@ -2,6 +2,34 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.53
+
+### Fixed
+
+- After you approve the change in the App, the agent ships it at once. It
+  could sit idle for over eight minutes when it asked for the approval just
+  after you gave it.
+- The task's status agrees everywhere: the sidebar, Home and the task page
+  count the same running tasks, an open pull request shows no spinner, and
+  the line under a task says what its step is doing now.
+- A notice about a question, a review or a shipped task goes away once that
+  moment has passed or you open the task.
+- On a phone a step document gets its full width: tap a block's words to
+  show its **+ Comment** button under it.
+- At the Product level Verify shows its checks as they run, and "Done means,
+  checked" appears once. An unwritten section reads "Being written" instead
+  of the agent's instructions.
+- The second opinion says "not run" and why when the other agent is not
+  installed, instead of waiting forever.
+- Usage that has no price reads "not priced" beside the cost instead of
+  "usage missing".
+- The start of the build names the model that builds a small Plan alone, so
+  it no longer seems to contradict **Settings › Workflow**.
+- The task header names the level once, keeps the step in view in its strip
+  on a phone, and shows a title's code without its backticks.
+- The Files panel shows a file's path under its own row, and Home says
+  "1 task".
+
 ## 12.0.0-beta.52
 
 ### New
