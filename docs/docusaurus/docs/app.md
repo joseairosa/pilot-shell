@@ -1,91 +1,85 @@
 ---
 title: The App
-description: Where you answer, read and comment while your agent works. One page per step, one layout for all seven.
+description: Where you answer, read and comment while your agent works. One page for every step.
 ---
 
-The QualityLayer App shows one focused question or decision in **Your turn**, with the context you need to answer. Your agent keeps working on anything that does not depend on your answer. Open the step's document to read, comment on its diagrams and designs, and follow the build and its proof. Close the App any time; your agents keep working.
+The QualityLayer App is where you answer, read and comment while your agent works. Close it any time; your agents keep working. It runs on macOS, Windows and Linux, and without a screen `qualitylayer app` opens it in your browser.
 
-It runs on macOS, Windows and Linux. Without a screen, `qualitylayer app` opens it in your browser.
+![The App at Discuss: your tasks on the left, the step track across the top, one question in Your turn with its choices and a field for your own answer, the Discuss document below, and Files and Comments on the right](pathname:///img/app/discuss-light.webp)
+![The App at Discuss: your tasks on the left, the step track across the top, one question in Your turn with its choices and a field for your own answer, the Discuss document below, and Files and Comments on the right](pathname:///img/app/discuss-dark.webp)
 
-## One page for every step
+*Example task in a fictional project.*
 
 | Part | What it does |
 | --- | --- |
-| Sidebar | Your tasks under **Your turn**, **Running** and **Shipped**. **+ New** starts a task |
-| Live status | What the agent is working on, when it needs you, and whether it is quiet or stopped. Open it for details |
-| Step track in the top bar | Where the task stands in its seven steps: Discuss, Research, Plan, Outline, Implement, Verify and Review. A person icon marks the two where you approve |
-| Your turn | One focused question or decision when your judgement is needed |
-| Step page | The step's document, as the parts that matter now, with your answers, the build and its proof |
-| Right sidebar | **Files** and **Comments**; compact designs are listed in **Files** |
-
-The file chip in the document header names the step's document. Its menu copies the path, opens the file in your editor, reveals it in the Finder, or opens the task folder.
-
-Tasks you started before the seven steps keep the five they began with; the App draws the steps a task has.
-
-## Three views of one document {#documents}
-
-Every step writes one Markdown file, and the App shows it three ways:
-
-| View | What it shows |
-| --- | --- |
-| **Step page** | The sections that matter now, drawn as parts: the **Done means** list, decisions with their diagrams, the slice list, the checks. Beside them, the live cards: a batch of questions, a **Your call**, the start card, an approval. A strip, **More in this document**, names the sections the page leaves out |
-| **Reader** | The whole file, every section in order, with an **On this page** outline. Sections that the step page leaves out are dimmed and tagged. Reach a section from the strip, the outline or any **Read the…** link |
-| **Files** | **Documents:** the seven files as one list, each with its state: not yet, started early, being written, your turn or done. **Designs.** **Reviews** the other agents wrote, only those that ran. **Records:** the output of every command and the evidence the checks kept |
-
-A document is listed before its step arrives when it is being written early: `02-research.md` while Discuss's batch is open, and `04-outline.md` while you read the Plan. The reader is where code shapes, file paths and commands live; the step page stays in plain words.
+| **Sidebar** | Your tasks: what needs you, what runs, what shipped. **+ New** starts one |
+| **Agent status** | The chip in the top bar: what the agent does now, whether it needs you, is quiet or has stopped |
+| **Step track** | Where the task stands. A person icon marks the two steps you approve |
+| **Your turn** | One question or decision, when your judgement is needed |
+| **Step page** | The step's document as the parts that matter now |
+| **Right sidebar** | **Files** (documents, designs, reviews, records) and **Comments** |
 
 ## Answering questions {#questions}
 
-Independent questions can arrive together, and the card shows one question at a time. Answer in any order: use **Skip for now** to reach another question, then return to the skipped one. Each question has choices and a marked recommendation. A strip above the card lists the whole batch, with answered questions ticked and still changeable. Where the choices need facts, they sit in columns side by side, with a **From Research** link to the finding they rest on. **Your own answer** stays visible; type your words and press **Send**. **Tell me more** asks for the context you need before deciding. **Use the recommendations for all N** answers the rest of the batch at once.
+Independent questions come as a batch. **Your turn** shows one question at a time, with a strip listing the whole batch. Each answer reaches your agent immediately, and your agent keeps working on whatever does not depend on it.
 
-Each answer goes to the agent at once and appears in the folded **Decided with you** history. The item leaves **Your turn**, and the card, sidebar and notification counts update together. **Change** corrects an earlier answer. If the agent has stopped, your answer stays saved for when it continues.
+| Control | What it does |
+| --- | --- |
+| A choice | Answers. The recommended one is marked; **From Research** opens the finding behind it |
+| **Your own answer** | Type your words and press **Send** |
+| **Tell me more** | Asks for the context you need first |
+| **Skip for now** | Moves on, so you can answer in any order |
+| **Use the recommendations for all N** | Answers the rest of the batch |
+| **Change** | Corrects an earlier answer, from **Decided with you** |
 
-The agent keeps working on independent parts of the task while questions remain open. Answering a batch does not approve the Plan or the finished change; each approval remains your own action. Questions come in batches only in Discuss and Research. The Plan asks none: a choice that only appears once a design is drawn sits inside it as **Your call**, at most two per task.
+Answering never approves the Plan or the change; each approval is its own click. Questions come only in Discuss and Research. A choice that appears only once a design is drawn sits in the Plan as a **Your call**, at most two per task.
 
-With the question card focused, **1–9** chooses the matching answer, **Enter** or **R** takes the recommendation, **M** opens Tell me more, and **↑/↓** moves between questions. **Tab** from the card opens your own answer. In the answer field, **Enter** sends and **Shift+Enter** adds a line. Choice shortcuts leave typing fields, links, menus and dialogs alone; **⌘**, **Ctrl**, **Alt** and text composition do not submit a choice.
+<details>
+<summary>Keyboard shortcuts</summary>
 
-## Agreements and live status
+With the question card focused:
 
-**Done means** is proposed document content in Discuss, and the Plan carries it. Comment on anything that needs correcting; the complete Plan approval covers the criteria together. Only explicitly asked choices need separate answers. Technical reviewer findings go to your planning agent to fix or answer.
+| Key | What it does |
+| --- | --- |
+| **1–9** | Choose the matching answer |
+| **Enter** or **R** | Take the recommendation |
+| **M** | Open Tell me more |
+| **↑ / ↓** | Move between questions |
+| **Tab** | Open your own answer |
 
-The top bar keeps the agent's name stable while work changes. Open its chip for current work, process signals, the agents running now and the history of those that finished, or use **Agent status** in the task menu on narrow screens. Cost details remain accessible there. Ordinary activity stays out of the document body; stopped recovery, build slices and recorded checks stay available. Escape or an outside click closes the activity panel.
+In the answer field, **Enter** sends and **Shift+Enter** adds a line.
 
-## Full-size reading
+</details>
 
-Every step's document opens in the reader, in reading order. While an actual choice needs your answer, its focused card can open the document context. After those choices close, the complete Plan appears with **Approve Plan** and **Give feedback** at the top right. Open **Document full size** to give it more room, use the outline to jump between sections, and comment as you read.
+## Reading a document {#documents}
 
-Implement shows **Build**: the slices, changes and checks as they happen. Its written record, `05-implement.md`, is available from **Files**. See [Implement](steps/implement.md).
+Every step writes one Markdown file. The App shows it three ways:
+
+| View | What it shows |
+| --- | --- |
+| **Step page** | The parts that matter now, in plain words: **Done means**, decisions with diagrams, slices, checks. **More in this document** names what it leaves out |
+| **Reader** | The whole file in order, with **On this page**. Code shapes, paths and commands live here |
+| **Files** | The seven documents with their state, the designs, the reviews, and the records of every command and check |
+
+A document can appear before its step: `02-research.md` while you answer Discuss, `04-outline.md` while you read the Plan. The file chip in the header copies the path, opens the file in your editor or shows it in its folder. **Copy document** pastes it into Confluence, Notion, Jira or GitHub.
+
+## Comments and designs
+
+Select a passage, a line or part of a diagram and comment. Your agent answers in the thread and says what it changed; **Ask…** passes the question to a teammate. Pages your agent draws appear in **Files**; open one full size and comment on a spot ([Designs](designs.md)).
 
 ## Home
 
-Home has four areas: **Needs attention**, **Running**, **Spent on agents**, and **Shipped**. Each attention row opens the task where you can answer or review. With a team, **Needs attention** also lists what teammates wait on you for: a question to answer, a request to review again, an opinion they asked for and the answer to a question you asked. The sidebar's Team count, the bell and, in a narrow window, the top bar's **Needs you** count all show the number of rows listed here. Shipped tasks show their time and estimated cost when those records are available.
+![Home: Needs attention with a row for each task that waits, Spent on agents with the estimated cost, and Shipped](pathname:///img/app/home-light.webp)
+![Home: Needs attention with a row for each task that waits, Spent on agents with the estimated cost, and Shipped](pathname:///img/app/home-dark.webp)
 
-The notification bell keeps questions, comments and stopped tasks within reach. Its count updates as you answer. Spending shows known dollar estimates; expand **About the estimate** for unpriced usage and calculation details.
-
-![Home with compact task destinations under Needs attention and Running, alongside spending and Shipped](pathname:///img/diagrams/home-light.svg)
-![Home with compact task destinations under Needs attention and Running, alongside spending and Shipped](pathname:///img/diagrams/home-dark.svg)
-
-## Items and their answers {#items}
-
-![The five families of items: Decide, Look, Confirm, Fix and Answer, each with its answers and the kinds of item in it](pathname:///img/diagrams/items-light.svg)
-![The five families of items: Decide, Look, Confirm, Fix and Answer, each with its answers and the kinds of item in it](pathname:///img/diagrams/items-dark.svg)
-
-Every item has short answers, such as **Agree** or **Change**, **Looks right**, **I confirm**, or **Fix it**.
-
-## Comments
-
-Select any passage, line or part of a diagram and write a comment; it shows in the **Comments** tab. Your agent answers in the thread and says what it changed. **Ask Anna about this** passes the question to a teammate.
-
-## Designs
-
-Ask your agent to draw a page and it appears as a compact entry in **Files**. Open it full size and comment on a spot. See [Designs](designs.md).
+Four areas: **Needs attention**, **Running**, **Spent on agents** and **Shipped**. Each row in **Needs attention** opens the task where you answer or review; with a team it also lists what teammates wait on you for. The bell and the counts show the same number. The App notifies you only when you can act.
 
 ## What it costs {#cost}
 
 ![The cost panel: the total, each step with its time, tokens and cost, and each agent named after its work](pathname:///img/diagrams/cost-light.svg)
 ![The cost panel: the total, each step with its time, tokens and cost, and each agent named after its work](pathname:///img/diagrams/cost-dark.svg)
 
-The dollar amount in a task's header opens its cost: the total, each step's time, tokens and cost, and the agents that did the work. Estimates use list prices and your agents' logs on this computer. Tokens with no known price appear as muted **tokens unpriced** detail; they are not added to the dollar total. Nothing is sent anywhere.
+The dollar amount in a task's header opens its cost per step and per agent. It is an estimate from list prices and your agents' logs on this computer; nothing is sent anywhere. Tokens without a known price show as **tokens unpriced** and stay out of the total.
 
 ## In Claude Code
 
@@ -94,8 +88,4 @@ A slim band above your prompt says when something waits for you in the App. `/ta
 ![The band above the Claude Code prompt: what waits for you in the App, how the build runs, or teammates’ questions for you](pathname:///img/diagrams/band-light.svg)
 ![The band above the Claude Code prompt: what waits for you in the App, how the build runs, or teammates’ questions for you](pathname:///img/diagrams/band-dark.svg)
 
-## Handy to know
-
-- **⌘K** finds a task or a setting.
-- **Copy** on any document pastes it into Confluence, Notion, Jira or GitHub.
-- The App notifies you only when you can act: a question or a review waits, a task stops or ships, or a teammate asks you.
+**⌘K** finds a task or a setting.

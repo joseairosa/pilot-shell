@@ -3,45 +3,51 @@ title: Discuss
 description: Your agent reads the code and asks until it knows what you want and what done means.
 ---
 
-![The seven steps, with Discuss highlighted](pathname:///img/diagrams/track-discuss-light.svg)
-![The seven steps, with Discuss highlighted](pathname:///img/diagrams/track-discuss-dark.svg)
+![The eight steps, with Discuss highlighted](pathname:///img/diagrams/track-discuss-light.svg)
+![The eight steps, with Discuss highlighted](pathname:///img/diagrams/track-discuss-dark.svg)
 
-Describe the change in your own words: **+ New** in the App, or `/ql <request>` in your agent (`$ql` in Codex). Your agent first names and creates the task with its Discuss document, so it appears in the task list immediately. It then reads the code and groups the questions it can ask together into one batch of three to six, each with its recommendation. When nothing is open, there is no batch: your agent never adds a question to fill one.
+Describe the change in your own words: **+ New** in the App, or `/ql <request>` in your agent (`$ql` in Codex). The task appears in the App at once. Your agent reads the code and groups the questions it can ask together into one batch of three to six, each with a recommendation. With nothing open, it asks nothing.
 
-## Questions in a batch {#the-question}
+![Discuss in the App: one question in Your turn with its choices, a visible own-answer field and Send, a strip of the batch above it, and the Discuss document below](pathname:///img/app/discuss-light.webp)
+![Discuss in the App: one question in Your turn with its choices, a visible own-answer field and Send, a strip of the batch above it, and the Discuss document below](pathname:///img/app/discuss-dark.webp)
 
-The **Your turn** card shows one question at a time, with its recommendation and relevant context; a strip above it lists the whole batch and ticks what you have answered. Answer in any order: **Skip for now** moves to another open question. Click a choice, write in the visible **Your own answer** field and press **Send**, choose **Tell me more**, or take the recommendation when you are not sure.
+*Example task in a fictional project.*
 
-Each answer reaches your agent immediately. It keeps working on anything that does not depend on an open answer, and writes the research questions meanwhile: [Research](research.md) starts while your batch is still open. A second batch comes only when your answers raise a new decision. The card and its counts update together. See [Answering questions and shortcuts](../app.md#questions).
+## Answer the batch {#the-question}
 
-The named agent status at the top says what your agent is doing. Open **Agent status** to see whether it is working, waiting for you, quiet or stopped.
+**Your turn** shows one question at a time. Pick a choice, write your own answer, or ask **Tell me more**. Answer in any order: **Skip for now** moves on ([all controls and shortcuts](../app.md#questions)). Each answer reaches your agent immediately, and [Research](research.md) starts while the batch is still open. A second batch comes only when your answers raise a new decision.
 
-![Discuss: one focused question in Your turn, with a visible own-answer field and Send, while the agent works on the scope](pathname:///img/diagrams/discuss-light.svg)
-![Discuss: one focused question in Your turn, with a visible own-answer field and Send, while the agent works on the scope](pathname:///img/diagrams/discuss-dark.svg)
+## The document {#the-page}
 
-## The page {#the-page}
-
-Discuss is one document, `01-discuss.md`: your request in your own words, the problem, proposed **Done means**, the scope and what you **decided with** your agent. The step page shows these; a strip, **More in this document**, names the rest, such as the first look at the code and the links you gave. **Files** opens the whole document in the reader, with its outline. Comment on a passage to request a correction, or ask your agent to update the local Markdown file. Each answer lands in **Decided with you** at once. Use **Change** while still in Discuss to correct an earlier answer.
+`01-discuss.md` holds your request in your words, the problem, the scope, what you **decided with** your agent, and **Done means**. Comment on any passage to correct it; **Change** corrects an answer while you are still in Discuss.
 
 ## What done means {#done-means}
 
-**Done means** is the proposed numbered list of results you will accept the change by. Verify later checks every point. You approve the current criteria together with the final Plan. Earlier answers and agreements remain in the history; a separate confirmation of each point is unnecessary. Changes to the criteria invalidate the Plan's approval.
+**Done means** is the numbered list of results you will accept the change by. Verify checks every point. You approve it together with the Plan, and changing it later withdraws that approval.
 
-## Too small for QualityLayer {#too-small}
+## Special cases
 
-When the change is one small, clear edit, the App says "Too small for a plan" and gives you a ready prompt for your plain agent. **Plan it anyway** if you want the full flow.
-
-## When what to build is still open {#prd}
-
-When no ticket says what to build, the Discuss document grows into a PRD: the success measure, the first release and what is left out. **Copy** exports it to share with your team.
-
-At the **Product** level every new feature starts as this brief, whatever the request says, and Discuss asks in two batches. The first settles the foundation: whether the problem reads right, how success is measured and which first release. The second, written from those answers, asks what the user sees, the behaviour and what is left out, with a wireframe of each screen that changes. The choices use product words, with no code names. A bug keeps its bug table. See [two levels](../intro.md#two-levels).
+| Case | What happens |
+| --- | --- |
+| **Too small for a plan** | One small, clear edit: the App hands you a ready prompt for your plain agent. **Plan it anyway** keeps the full flow |
+| **What to build is still open** | No ticket says what to build, so the document grows into a PRD with the success measure, the first release and what is left out. **Copy** exports it |
 
 ## A bug {#a-bug}
 
-For a bug, you agree on when it happens, what goes wrong, what should happen and what must keep working. Your agent reproduces it and finds the cause in [Research](research.md), before anything is planned; that document is titled **Why it breaks**.
+You agree on when it happens, what goes wrong, what should happen and what must keep working. [Research](research.md) reproduces it and finds the cause, under **Why it breaks**.
 
 ![Diagnosis of a bug: when it happens, what happens today, what is expected, and what must keep working](pathname:///img/diagrams/diagnose-light.svg)
 ![Diagnosis of a bug: when it happens, what happens today, what is expected, and what must keep working](pathname:///img/diagrams/diagnose-dark.svg)
+
+## At the Product level
+
+Every new feature starts as a product brief, and Discuss asks in two batches, in product words with no code names:
+
+| Batch | What it settles |
+| --- | --- |
+| **The foundation** | The **Problem** in your words, the **Success measure**, the **First release** and what comes later |
+| **The solution** | **What the user sees**, with a grey wireframe of each screen that changes; the behaviour; **Not doing** |
+
+A bug keeps its bug table. See [two levels](../intro.md#two-levels).
 
 Next: [Research](research.md).

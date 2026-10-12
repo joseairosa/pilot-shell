@@ -1,57 +1,50 @@
 ---
 title: Plan
-description: "The one document you approve before any code: what it rests on, the design and its decisions, the contracts the build is held to, and how you will know it works."
+description: "The one document you approve before any code: what it rests on, the design and its decisions, and how you will know it works."
 ---
 
-![The seven steps, with Plan highlighted](pathname:///img/diagrams/track-plan-light.svg)
-![The seven steps, with Plan highlighted](pathname:///img/diagrams/track-plan-dark.svg)
+![The eight steps, with Plan highlighted](pathname:///img/diagrams/track-plan-light.svg)
+![The eight steps, with Plan highlighted](pathname:///img/diagrams/track-plan-dark.svg)
 
-The Plan is the one document you approve before any code is written. Agents build from it afterwards, so this is where your judgement pays most. It rests on the [Research](research.md); the slices come afterwards, in the [Outline](outline.md), which needs no approval.
+The Plan is the one document you approve before any code is written. Agents build from it, so this is where your judgement pays most.
 
-## Your turn {#items}
+![The Plan in the App: a diagram of how usage flows through the system, a table of what changes, and Approve Plan and Give feedback at the top right](pathname:///img/app/plan-light.webp)
+![The Plan in the App: a diagram of how usage flows through the system, a table of what changes, and Approve Plan and Give feedback at the top right](pathname:///img/app/plan-dark.webp)
 
-Review the complete Plan, including its diagrams, designs and reasoning:
+*Example task in a fictional project.*
 
-1. **What the Plan rests on:** the research findings it builds on, each in one sentence, so you can see why it looks the way it does.
-2. **The design**, for a change people see. Read it and comment on anything that needs correction. See [Designs](../designs.md).
-3. **Engineering decisions**, each with its diagram and reasoning. These explain the agent's proposals; a heading does not automatically ask for your approval. Below them, the **contracts** between the parts, folded to one headline each, show what the build is held to; open one with **Read in full**.
-4. **Done means**, from [Discuss](discuss.md): review the proposed results and their reasoning. Your final Plan approval covers these criteria together with the Plan.
-5. **Decided by you** and **Decisions made for you:** your answers from Discuss and Research, then the smaller choices your agent took, each with its reason. Ask your agent to explain or revise any of them.
-6. **Not doing** and **Before the build:** what the build will leave alone, and what must be in place before it starts, such as a login only you can provide.
-7. **How we will know it works:** the one check that tells whether the whole change works, the expected size, and one line that says whether the change is risky and why. A risky change gets the other agent's second opinion once it is built.
+## What you read {#items}
 
-The Plan asks no batch of questions. A choice that appears only once a design is drawn sits inside the Plan as **Your call**, with two options, a recommendation and the design; there are at most two, and **Approve Plan** stays locked until each is settled. **Your turn** focuses one explicitly asked choice at a time. Open the document context when you need it. Each answer reaches your agent immediately and is recorded at the passage it settled. Technical review findings return to the planning agent to fix or answer; only a new ambiguous or hard choice needing your judgement becomes a question.
+| Part | What it tells you |
+| --- | --- |
+| **What the Plan rests on** | The research findings behind it, one sentence each |
+| **The design** | For a change people see; comment on any spot ([Designs](../designs.md)) |
+| **Engineering decisions** | Each with its diagram and reasoning; the **contracts** between parts fold to one headline each |
+| **Done means** | The results from [Discuss](discuss.md); your approval covers them |
+| **Decided by you**, **Decisions made for you** | Your answers, then the smaller choices your agent took, each with its reason |
+| **Not doing**, **Before the build** | What stays untouched, and what must be ready first, such as a login only you can give |
+| **How we will know it works** | The one check for the whole change, its size, and whether it is risky and why |
 
-In a focused decision card, **1–9** selects the matching answer and **←/→** moves between decisions. **Enter** sends your words; **Shift+Enter** adds a line. Choice shortcuts leave typing fields and text composition alone, and do not run with **⌘**, **Ctrl** or **Alt**.
+At the **Engineering** level every section is open. At the **Product** level each decision says what changes for the user and why, and the diagrams and contracts fold under **More in this document** ([two levels](../intro.md#two-levels)).
 
-Once the real choices are answered, the complete Plan appears in the main pane. Use **Approve Plan** at the top right to approve it once, covering the proposed criteria, decisions and design together. **Give feedback** opens a place to write and send the changes you want. Approval waits while required reviewer work is still being processed; answering a question does not approve the Plan.
+## Approve or give feedback {#answering}
 
-At the **Product** level each decision says what changes for the user and why. **Engineering decisions** keep their headline and two sentences, and the diagrams, contracts and patterns fold under **More in this document**, one click away. See [two levels](../intro.md#two-levels).
+The Plan asks no batch of questions. A choice that appears only once a design is drawn sits inside it as a **Your call**, with two options and a recommendation; there are at most two. **Your turn** shows them one at a time, with the part of the Plan each concerns, and each answer reaches your agent immediately. Findings from the technical review return to the planning agent, which fixes or answers them; only a new hard choice reaches you.
 
-## Read the Plan full size {#full-size}
+Once the choices are settled, the complete Plan appears in the main pane. Only your click approves it; answering a question does not approve the Plan:
 
-Read the complete Plan in the main pane before approving it. **Document full size** adds the outline when you want more room. Jump to a section, read the slices and checks, and comment on a passage without leaving the Plan. The document header holds its file chip, reading controls and menu for the agent's version and records.
+- **Approve Plan** at the top right approves the Plan, its **Done means** and its design together, once.
+- **Give feedback** sends the changes you want. Your agent answers each note and revises the Plan; the diff shows what changed. A change to **Done means** withdraws an earlier approval.
 
-![The full-size Plan with its document header, outline, line comments, named agent status and Files and Comments tabs](pathname:///img/diagrams/plan-full-light.svg)
-![The full-size Plan with its document header, outline, line comments, named agent status and Files and Comments tabs](pathname:///img/diagrams/plan-full-dark.svg)
-
-### Diagrams you can comment on {#diagrams}
+## Comment on a diagram {#diagrams}
 
 ![An engineering decision as a diagram: a pinned comment opens a thread, the agent answers in it and changes the Plan](pathname:///img/diagrams/decision-light.svg)
 ![An engineering decision as a diagram: a pinned comment opens a thread, the agent answers in it and changes the Plan](pathname:///img/diagrams/decision-dark.svg)
 
-Click any part of a diagram to pin a comment. Your agent answers in the thread and changes the Plan. Teammates can do the same.
+Click any part of a diagram or any passage to pin a comment. Your agent answers in the thread and changes the Plan. Teammates can do the same; ask them to read along in [Plan reviews](../team/plans.md).
 
 ## Before it reaches you {#before-it-reaches-you}
 
-The review starts with the first full draft, not when you are told. With Claude Code and Codex both installed, the other agent reads the Plan: decisions that do not follow from what you agreed, a simpler shape, missed risks, contradictions with the code and a size that looks off. With only one installed, a separate Sonnet reviewer of that agent reads it with the same questions. Your agent folds the findings in, and only then does the Plan reach you, so the Plan you are told about is ready to approve. **Reviewed by** shows who read it, what they found and what happened to each finding. [Settings](../reference/settings.md#second-opinion) lets you choose when the other agent reads the Plan. Anything new the Plan depends on is tried out first, outside your project.
+Another agent reads the first full draft: Codex reads Claude Code's Plan and the other way round, or a separate reviewer when you have only one. It looks for decisions that do not follow from what you agreed, a simpler shape, missed risks and contradictions with the code. Your agent folds the findings in; **Reviewed by** shows what each became. [Settings](../reference/settings.md#second-opinion) chooses when this runs.
 
-## With reviewers {#reviewers}
-
-Ask teammates to read along; you see who has read and who approved. See [Plan reviews](../team/plans.md).
-
-## When you ask for changes
-
-Your agent answers each note and revises the Plan. Earlier answers and agreements stay saved. Changes to **Done means** invalidate the Plan's approval, so you can review the current document before approving again. The Plan's diff shows the document changes line by line.
-
-While you read, your agent writes the [Outline](outline.md); the status at the top says so. After you approve, the Outline is finished and the App opens [Implement](implement.md).
+While you read, your agent writes the [Outline](outline.md). After you approve, the App opens [Implement](implement.md).

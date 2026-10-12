@@ -5,8 +5,8 @@
  */
 import { CONTACT_EMAIL } from "./product";
 
-/** The four colours a highlight or a table group can carry, one per part of the workflow. */
-export type Hue = "plan" | "build" | "verify" | "review";
+/** A table group's colour: the workflow part it belongs to (as the home page colours the steps), or plain for the rest. */
+export type Hue = "plan" | "build" | "verify" | "review" | "plain";
 
 export interface Plan {
   id: "solo" | "team" | "enterprise";
@@ -140,7 +140,7 @@ export const COMPARE: CompareGroup[] = [
   },
   {
     name: "Everyday",
-    hue: "build",
+    hue: "plain",
     rows: [
       row("The App for macOS, Windows and Linux", true, true, "On a server or in WSL, it opens in your browser"),
       row("A notification when it is Your turn", true, true, "In the App's bell, from the menu bar, and in Claude Code above the prompt"),
@@ -150,7 +150,7 @@ export const COMPARE: CompareGroup[] = [
   },
   {
     name: "Team",
-    hue: "build",
+    hue: "plain",
     rows: [
       row("Share plans with your team", false, true),
       row("Team feedback goes straight to your agent", false, true),
@@ -169,7 +169,7 @@ export const COMPARE: CompareGroup[] = [
   },
   {
     name: "Enterprise",
-    hue: "review",
+    hue: "plain",
     rows: [
       onRequest("Host it in your own cloud, on-premise or in a private VPC"),
       onRequest("Volume pricing"),

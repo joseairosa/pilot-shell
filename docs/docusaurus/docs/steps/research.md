@@ -1,42 +1,34 @@
 ---
 title: Research
-description: Agents read the code before anything is designed, without your request in front of them, and you settle only what the code leaves open.
+description: Agents read the code before anything is designed, without your request in front of them. You settle only what the code leaves open.
 ---
 
-![The seven steps, with Research highlighted](pathname:///img/diagrams/track-research-light.svg)
-![The seven steps, with Research highlighted](pathname:///img/diagrams/track-research-dark.svg)
+![The eight steps, with Research highlighted](pathname:///img/diagrams/track-research-light.svg)
+![The eight steps, with Research highlighted](pathname:///img/diagrams/track-research-dark.svg)
 
-Research is where QualityLayer finds out how the code works today, before it decides what to change. It needs no approval from you. The only thing it may ask is one batch of choices the code leaves open.
+Research finds out how the code works today, before anything is designed. It starts while your Discuss batch is still open and needs no approval.
+
+![Research in the App: a diagram of how the code works today, and the findings with what the change can reuse](pathname:///img/app/research-light.webp)
+![Research in the App: a diagram of how the code works today, and the findings with what the change can reuse](pathname:///img/app/research-dark.webp)
+
+*Example task in a fictional project.*
 
 ## What your agent does {#what-the-agent-does}
 
-Right after its first look at the code, your agent writes the research questions into `02-research.md`, while your Discuss batch is still open. Your answers and the research overlap instead of adding up.
+| | |
+| --- | --- |
+| **Reads without your request** | Research agents each take an area and answer questions like "how does a retry reach the queue?" They never see what you asked for, so the findings describe the code as it is. A small task is read by your agent itself |
+| **Checks every claim** | Your agent reopens each file a finding points to before writing it down |
+| **Names the risk** | Code the change should reuse, files that change often, parts that are hard to change, and how it is tested today |
 
-- **Agents read the code without your request.** A few research agents each take an area and answer questions such as "how does a retry reach the queue?" They never see what you asked for or what done means, so their findings describe the code as it is.
-- **A small task is read by your agent itself.** With three questions or fewer and nothing left untraced, it answers them directly.
-- **Your agent checks every claim.** It reopens each file it was pointed to before writing the findings, then adds what the goal puts at risk: code the change should reuse, files that change often, and parts that are hard to change.
-
-For a bug, Research is the diagnosis. The document is titled **Why it breaks**: how to reproduce it, the cause with how sure your agent is, what was tried and ruled out, and the edges that were probed.
+For a bug, Research is the diagnosis, titled **Why it breaks**. It holds how to reproduce the bug, the cause and how sure your agent is, what was ruled out, and the edge cases tested.
 
 ## What you do {#what-you-do}
 
-Usually nothing. Read along if you like, and comment on a passage you disagree with.
+Usually nothing; comment on a finding you disagree with. When the code leaves a real choice open, **Your turn** shows one batch of three to six questions, each with what the code says about every option and a link to its finding. A clear task has no batch. At the **Product** level the batch asks only what a product person can judge: what the user sees, what it costs them, who it is for and what comes first.
 
-When the code leaves real choices open, **Your turn** shows one batch of three to six questions, each with what the code says about every option and a link to the finding it rests on. Answer in any order, or use **Use the recommendations for all** of them when you trust them. A clear task has no batch and goes straight to the Plan. Your agent never adds a question to reach a number.
+## The document {#the-page}
 
-## The page {#the-page}
-
-![Research: the questions with their state, the findings folded to their headlines, what the goal puts at risk and what you decided](pathname:///img/diagrams/research-light.svg)
-![Research: the questions with their state, the findings folded to their headlines, what the goal puts at risk and what you decided](pathname:///img/diagrams/research-dark.svg)
-
-Research is one document, `02-research.md`, titled **How the code works today**. The step page shows:
-
-- **Summary:** what the findings add up to, in plain words.
-- **The questions** the research agents answered, with the state of each.
-- **Findings,** folded to one headline each. Open one for the call tree, file tree or data shape beside its explanation.
-- **What the goal puts at risk,** and **How it is tested today**.
-- **Open questions,** and **Decided with you:** your answers to the batch.
-
-A strip, **More in this document**, names the sections that stay in the whole file, such as the code references. Open the whole document in the reader from **Files**.
+`02-research.md` is titled **How the code works today**. It opens with a summary in plain words, then the questions and their state. Each finding folds to one headline; open it for its call tree or data shape. It ends with what the goal puts at risk and **Decided with you**.
 
 Next: [Plan](plan.md).

@@ -1,50 +1,50 @@
 ---
 title: Verify
-description: Agents that did not write the code check every Done means point, with its scenarios and evidence together and a live status of what runs now.
+description: Agents that did not write the code check every Done means point, with its scenarios and evidence together.
 ---
 
-![The seven steps, with Verify highlighted](pathname:///img/diagrams/track-verify-light.svg)
-![The seven steps, with Verify highlighted](pathname:///img/diagrams/track-verify-dark.svg)
+![The eight steps, with Verify highlighted](pathname:///img/diagrams/track-verify-light.svg)
+![The eight steps, with Verify highlighted](pathname:///img/diagrams/track-verify-dark.svg)
 
-Verify starts by itself when the last slice is built. Agents that did not write the code check it; you have nothing to do unless it stops for you.
+Verify starts by itself when the last slice is built. Agents that did not write the code check it. You have nothing to do unless it stops for you.
+
+![Verify in the App: the six checks with who runs each and its result](pathname:///img/app/verify-light.webp)
+![Verify in the App: the six checks with who runs each and its result](pathname:///img/app/verify-dark.webp)
+
+*Example task in a fictional project.*
 
 ## Six checks, in this order {#lanes}
 
-Verify runs six named checks. The first two run side by side, and so do the fourth and fifth:
+| Check | What it does |
+| --- | --- |
+| **1. Polish** | Removes near-copies and dead code, adds missing tests, updates the docs, and compares a screen with its design. It does not hunt for bugs |
+| **2. Security review** | Reads the change when it touches sign-in, secrets or outside input |
+| **3. Project checks** | Your tests, types, lint and build, run and recorded by QualityLayer |
+| **4. Independent review** | Agents that did not write the code prove every **Done means** point on the running program |
+| **5. Second opinion** | On a risky change, the other coding agent looks for what would break ([Settings](../reference/settings.md#second-opinion) can make it always run) |
+| **6. Fix rounds** | One agent fixes everything found at once; only what failed or what a fix touched runs again |
 
-1. **Polish:** removes near-copies and dead code, adds missing tests, updates the docs and, for a screen, compares it with its design. It never hunts for bugs. A small change skips it and says so: the Polish lane reads "skipped · light task", and the agent that built the change read the whole diff once more before the checks. That is a Plan of one or two slices with no trust boundary, nothing risky and no screen.
-2. **Security review,** when the change crosses a trust boundary: sign-in, secrets or outside input. It only reads. What Polish changes beside it is read once more, before the project checks.
-3. **Project checks:** your tests, types, lint and build, run once and recorded by QualityLayer. A result is reused when the code and the environment have not changed.
-4. **Independent review:** agents that did not write the code prove every **Done means** point on the running program.
-5. **Second opinion,** when the change is risky: the other coding agent reads what was built, hunting for what would break. By default it runs only on risky changes; [Settings](../reference/settings.md#second-opinion) can make it always.
-6. **Fix rounds:** one agent per round fixes everything found at once, and only what failed or was touched is checked again: one judge for up to twelve such points, never more judges than the first round had. A share that only re-reads recorded checks runs on the helpers' model. When the Plan's **Risky** line says none, only the failed points are checked again.
+Checks 1 and 2 run side by side, and so do 4 and 5. A small change (one or two slices, nothing risky, no screen, no sign-in or secrets) skips Polish, and the page says "skipped · light task".
 
-The page shows these lanes in the order they run, each with who does it, a short line and its result; open one for its full text.
+## Proof for each point {#live}
 
-## Proof for each Done means point {#live}
+Each **Done means** point shows its checks and evidence as they come in. Open one for its scenarios and proof: the output, a screenshot or a file. The record is `06-verify.md`.
 
-![Verify: the agent's work above proof grouped by Done means point; its named status shows what is being checked](pathname:///img/diagrams/verify-light.svg)
-![Verify: the agent's work above proof grouped by Done means point; its named status shows what is being checked](pathname:///img/diagrams/verify-dark.svg)
-
-Each **Done means** point shows its checks and evidence together, filling in as they run. Open a point to read its scenarios and proof. The checks above and the agents' reviews stay available too. The independent review covers every point of **Done means**, every scenario of the Outline and the whole diff.
-
-Each result keeps its proof: the output, a screenshot or a file. The page is `06-verify.md`: the lanes, each **Done means** point with its proof, then what was found while checking. The named agent status in the top bar says which check runs now; **Agent status** opens the details. With nothing waiting for you, the page shows the agent's work. A stopped check that needs a decision appears in **Your turn**.
-
-## When a check fails {#fixes}
-
-An agent writes a failing test, fixes the code, and the check runs again. You are not asked.
+When a check fails, an agent writes a failing test, fixes the code and runs the check again. You are not asked.
 
 ## When it stops {#when-it-stops}
 
-After the initial review and two failed fixing rounds, **Your turn** shows what the recorded rounds fixed, their time and estimated cost, and what still fails. You choose **One more round**, **Review it as it is**, or **Stop here**. One more round allows exactly one additional review run; if it fails, the choice returns. Earlier records keep their actual history.
+After the first review and two failed fix rounds, **Your turn** shows what was fixed, the time and estimated cost so far, and what still fails:
+
+| Choice | What happens |
+| --- | --- |
+| **One more round** | One more review run; if it fails, the choice comes back |
+| **Review it as it is** | Goes on to Review with the open items listed |
+| **Stop here** | The work and its evidence stay |
 
 ![The fixing hold lists recorded rounds and open failures, with One more round, Review it as it is and Stop here](pathname:///img/diagrams/stopped-light.svg)
 ![The fixing hold lists recorded rounds and open failures, with One more round, Review it as it is and Stop here](pathname:///img/diagrams/stopped-dark.svg)
 
-During Verify, the **Task menu** also offers **Stop checking and review**. Its confirmation explains that open items will remain in Review.
-
-## Only you can confirm {#only-you}
-
-Some points no agent may settle, such as one live call to a paid service. They wait for you in Review.
+To end checking early, use **Stop checking and review** in the task menu. Some points no agent may settle, such as a live call to a paid service; they wait for you in Review.
 
 Next: [Review](review.md).

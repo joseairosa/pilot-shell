@@ -1,77 +1,80 @@
 ---
 slug: /
 title: Overview
-description: How QualityLayer takes your coding agent from a request to a reviewed change, and where you decide along the way.
+description: QualityLayer takes your coding agent from a request to a merged pull request in eight steps, and shows you where you decide.
 ---
 
 <figure class="ql-film">
   <video controls preload="none" playsinline poster="https://qualitylayer-media.max-ritter.workers.dev/overview.webp" src="https://qualitylayer-media.max-ritter.workers.dev/overview.mp4"></video>
-  <figcaption>How QualityLayer works, in about five minutes: the problem it solves, the seven steps, and working on your own or with your team.</figcaption>
+  <figcaption>How QualityLayer works, in about five minutes: the problem it solves, the steps, and working on your own or with your team.</figcaption>
 </figure>
 
-QualityLayer runs your coding agent through an engineering process with your decisions recorded along the way. You agree on a plan before any code is written, the agent builds it in small tested slices, and agents that did not write the code check the result. **Your turn** in the **QualityLayer App** shows one focused question. Independent questions can arrive together; skip one for now or write your own answer and press **Send**. Each answer reaches your agent immediately, while it keeps working on the rest.
+QualityLayer takes your coding agent from a request to a merged pull request in eight steps. You agree on a plan before any code is written. Your agent builds it in small tested slices, and agents that did not write the code check the result against your request. You answer and approve in the **QualityLayer App**.
 
-![The QualityLayer App: a named agent status and the seven steps, one focused question, and Files and Comments in the right sidebar](pathname:///img/diagrams/app-light.svg)
-![The QualityLayer App: a named agent status and the seven steps, one focused question, and Files and Comments in the right sidebar](pathname:///img/diagrams/app-dark.svg)
+![The QualityLayer App at the Plan step: the step track across the top, the Plan with a diagram in the middle, Approve Plan and Give feedback at the top right, and Files and Comments on the right](pathname:///img/app/plan-light.webp)
+![The QualityLayer App at the Plan step: the step track across the top, the Plan with a diagram in the middle, Approve Plan and Give feedback at the top right, and Files and Comments on the right](pathname:///img/app/plan-dark.webp)
 
-**Start here:** [Install](install.md) · [Your first task](first-task.md) · [The App](app.md) · [The seven steps](steps/discuss.md) · [Designs](designs.md)
+*Example task in a fictional project.*
 
-## How it fits together {#how-it-fits-together}
+**Start here:** [Install](install.md) · [Your first task](first-task.md) · [The App](app.md) · [The eight steps](steps/discuss.md) · [Designs](designs.md)
 
-Your agent works through the **QualityLayer CLI** on your computer, which keeps each task in plain Markdown files in your repository. The **QualityLayer App** reads the same files and shows them to you. Sharing is optional. A Plan shared with your team or by link is encrypted on your computer first. The **QualityLayer Server** at qualitylayer.dev sees who is involved and the step; it cannot read your plans or comments ([your data](reference/files.md#privacy)).
+## The eight steps {#the-seven-steps}
 
-![How QualityLayer fits together: on your computer, your agent runs the QualityLayer CLI, which keeps each task in Markdown files in your repository, and the QualityLayer App reads the same files; only when you share, plans and comments go to the QualityLayer Server at qualitylayer.dev, encrypted, for your team and for people with a share link](pathname:///img/diagrams/architecture-light.svg)
-![How QualityLayer fits together: on your computer, your agent runs the QualityLayer CLI, which keeps each task in Markdown files in your repository, and the QualityLayer App reads the same files; only when you share, plans and comments go to the QualityLayer Server at qualitylayer.dev, encrypted, for your team and for people with a share link](pathname:///img/diagrams/architecture-dark.svg)
+Every task takes the same steps, in order. The first seven each write one document; the last follows the pull request until it is merged. You approve twice: the Plan, and the finished change.
 
-Each step is one document, from `01-discuss.md` to `07-review.md`. The files are yours, committed with the change, and they stay when you uninstall ([what each file holds](reference/files.md)). Interactive designs stay on your computer; an explicitly shared Plan can include a labelled raster still. Your agent calls the CLI at every step; the [command reference](reference/commands.md) lists its commands.
-
-## The seven steps {#the-seven-steps}
-
-Every task takes the same seven steps, and each writes one document. You approve twice: the Plan before any code, and the finished change. Questions come in batches, only in Discuss and Research.
-
-![The seven steps: Discuss, Research, Plan, Outline, Implement, Verify and Review. You approve the Plan and the finished change; your agent does the rest](pathname:///img/diagrams/flow-light.svg)
-![The seven steps: Discuss, Research, Plan, Outline, Implement, Verify and Review. You approve the Plan and the finished change; your agent does the rest](pathname:///img/diagrams/flow-dark.svg)
+![The eight steps: Discuss, Research, Plan, Outline, Implement, Verify, Review and the pull request. You approve the Plan and the finished change and merge the pull request; your agent does the rest](pathname:///img/diagrams/flow-pr-light.svg)
+![The eight steps: Discuss, Research, Plan, Outline, Implement, Verify, Review and the pull request. You approve the Plan and the finished change and merge the pull request; your agent does the rest](pathname:///img/diagrams/flow-pr-dark.svg)
 
 | Step | What happens |
 | --- | --- |
-| **[Discuss](steps/discuss.md)** | Your agent asks in batches until it knows what you want and what done means |
+| **[Discuss](steps/discuss.md)** | Your agent asks, in batches, until it knows what you want and what done means |
 | **[Research](steps/research.md)** | Agents read the code without your request in front of them; you settle what it leaves open |
-| **[Plan](steps/plan.md)** | The decided design, with diagrams where they help; you approve it once, before any code |
-| **[Outline](steps/outline.md)** | Your agent cuts the Plan into slices while you read it; nothing to approve |
-| **[Implement](steps/implement.md)** | One command starts the build; it runs on its own in small slices, each tested |
-| **[Verify](steps/verify.md)** | Six named checks, including agents that did not write the code checking every point |
+| **[Plan](steps/plan.md)** | The decided design, with diagrams where they help. You approve it once, before any code |
+| **[Outline](steps/outline.md)** | Your agent cuts the Plan into slices while you read it. Nothing to approve |
+| **[Implement](steps/implement.md)** | One command starts the build, in small slices, each tested |
+| **[Verify](steps/verify.md)** | Six checks, including agents that did not write the code |
 | **[Review](steps/review.md)** | You settle what is left and approve; the pull request opens |
+| **[Pull request](steps/pull-request.md)** | QualityLayer follows checks and reviewers. You merge it, and the task closes |
 
 A bug takes the same steps. Its cause is found in Research, before anything is planned.
 
 ## Who it is for
 
-Medium to large changes in a repository you care about, on your own or with your team. A new request first gets a named Discuss task. If it is too small for a plan, that task closes with its document preserved and a ready prompt for your plain agent.
+Medium and large changes in a repository you care about, on your own or with your team. When a request is too small for a plan, your agent closes the task and hands you a ready prompt for your plain agent.
 
-It works with Claude Code and Codex, in the terminal, their desktop apps or your IDE, and with [any other agent](agents/other.md) that runs shell commands. Your agent writes the code, on the subscription you already have.
+It works with Claude Code and Codex, in the terminal, their desktop apps or your IDE, and with [any other agent](agents/other.md) that runs shell commands. Your agent writes the code on the subscription you already have.
 
-### Two levels
+## Two levels
 
-You pick the level you work at once, at **Setup** on the first start, and change it any time in **Settings › Workflow**. The task header names each task's level and switches how that one task reads on your computer, without changing what you approved.
+Pick your level at **Setup** on the first start; change it any time in **Settings › Workflow**. The task header shows each task's level: change it there until you approve the Plan, or read the task as the other level at any time.
 
-- **Product** is for product owners, product managers and leadership. A new feature starts as a product brief. Discuss settles the problem, how success is measured and the first release before it asks what the user sees, with a wireframe of each screen that changes. Discuss and the Plan read in product words, and the engineering sections fold under **More in this document**.
-- **Engineering** is for engineers. The seven steps read as they always did, with every working section open. It applies when you pick nothing.
+| | Engineering (default) | Product |
+| --- | --- | --- |
+| For | Engineers | Product owners, product managers, leadership |
+| A task starts as | The full technical plan | A product brief |
+| Discuss settles | The problem, what done means, the scope, a first look at the code | The problem, success measure, first release, what the user sees, what you are not doing |
+| Discuss becomes | A request with numbered points of what done means | A PRD for Confluence, Google Docs or Jira |
+| The Plan shows | Each decision with its diagram, plus contracts, patterns, files and tests | What changes for the user, and why |
+| Folded away | Nothing: every section is open | Engineering detail, one click away under **More in this document** |
+| Build, Verify, Review | The same | The same |
 
-Both levels take the same seven steps and write the same seven files. The level changes what a new task starts from and what each page puts first, never the steps.
+Both levels take the same steps and write the same files.
+
+## How it fits together {#how-it-fits-together}
+
+Everything runs on your computer. Your agent works through the **QualityLayer CLI**, which keeps each task as Markdown files in your repository. The **App** shows the same files. Sharing is optional: a Plan you share with your team or by link is encrypted on your computer first. The server at qualitylayer.dev never sees your plans or comments ([your data](reference/files.md#privacy)).
+
+![How QualityLayer fits together: on your computer, your agent runs the QualityLayer CLI, which keeps each task in Markdown files in your repository, and the QualityLayer App reads the same files; only when you share, plans and comments go to the QualityLayer Server at qualitylayer.dev, encrypted, for your team and for people with a share link](pathname:///img/diagrams/architecture-light.svg)
+![How QualityLayer fits together: on your computer, your agent runs the QualityLayer CLI, which keeps each task in Markdown files in your repository, and the QualityLayer App reads the same files; only when you share, plans and comments go to the QualityLayer Server at qualitylayer.dev, encrypted, for your team and for people with a share link](pathname:///img/diagrams/architecture-dark.svg)
+
+The documents, `01-discuss.md` to `07-review.md`, are yours: committed with the change and kept when you uninstall ([what each holds](reference/files.md#documents)).
 
 ## Coming from plan mode in your IDE {#from-plan-mode}
 
-If you use Claude's plan mode in PhpStorm or VS Code, you can keep reading each change in the IDE's diff. QualityLayer adds these steps around that work:
+Keep reading each change in your IDE's diff. QualityLayer adds three things around it:
 
-- **You approve the plan:** your agent asks each decision, and the Plan shows mockups and diagrams you and your team can comment on.
-- **The build runs in tested slices** from the approved Plan, and agents that did not write the code check every point you agreed on.
-- **You review what is left,** with the proof beside it. The diff stays where you like to read it, in your IDE.
-
-## Who does what
-
-![Who does what: you and your agent discuss and write the Plan; the orchestrator you start with one command writes no code and hands each slice to workers; agents that did not write the code check it; a second opinion from the other coding agent reads the Plan and risky changes](pathname:///img/diagrams/agents-light.svg)
-![Who does what: you and your agent discuss and write the Plan; the orchestrator you start with one command writes no code and hands each slice to workers; agents that did not write the code check it; a second opinion from the other coding agent reads the Plan and risky changes](pathname:///img/diagrams/agents-dark.svg)
-
-You and your agent discuss and plan with your [Planning defaults](reference/settings.md#defaults). One command starts the build with your Build defaults. An orchestrator that writes no code hands each slice to the workers' model. Your agent then works on its own until the final review. Agents that did not write the code check the result, and the App shows what each step costs.
-
-**Look something up:** [Commands](reference/commands.md) · [Settings](reference/settings.md) · [Plan reviews](team/plans.md)
+| Plan mode | With QualityLayer |
+| --- | --- |
+| A plan in the chat | A Plan with mockups and diagrams that you and your team comment on, approved once |
+| One long build | Tested slices from the approved Plan |
+| You check the result | Agents that did not write the code check every point you agreed on; you settle what is left |

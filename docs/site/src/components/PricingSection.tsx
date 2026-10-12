@@ -1,4 +1,5 @@
 import { useState, type CSSProperties } from "react";
+import { ArrowRightLeft, KeyRound, WifiOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import CheckoutLink from "@/components/CheckoutLink";
 import Questions from "@/components/Questions";
@@ -7,7 +8,8 @@ import { OFFLINE_DAYS } from "@/lib/product";
 import { COMPARE, PLANS, type Cell, type Hue, type Plan } from "@/lib/pricing";
 import { Link } from "react-router-dom";
 
-const HUE: Record<Hue, string> = { plan: "var(--mx-ink)", build: "var(--mx-ink)", verify: "var(--mx-ink)", review: "var(--mx-ink)" };
+/** The home page's step colours: amber where you decide, blue where agents build, violet where they check. */
+const HUE: Record<Hue, string> = { plan: "var(--ql-amber)", build: "var(--ql-accent)", verify: "var(--ql-check)", review: "var(--ql-amber)", plain: "var(--mx-ink3)" };
 const hue = (h: Hue) => ({ "--g": HUE[h] }) as CSSProperties;
 
 type Billing = "monthly" | "yearly";
@@ -109,9 +111,9 @@ const PricingSection = () => {
         <div className="pr-wrap">
           <h2 id="licence-h" className="pr-h2">How the licence works</h2>
           <div className="pr-how">
-            <div className="pr-hi" style={hue("build")}><b>Activate once</b><span>Paste your key in the App on first start, or run <span className="pr-code">qualitylayer licence activate &lt;key&gt;</span>. Manage invoices, seats and payment in <Link to="/billing">your billing account</Link>.</span></div>
-            <div className="pr-hi" style={hue("verify")}><b>Works offline</b><span>The licence is checked once a day. Without a connection, a paid licence works for up to {OFFLINE_DAYS} days after its last successful check.</span></div>
-            <div className="pr-hi" style={hue("plan")}><b>Coming from Pilot Shell</b><span>Your subscription and your plans carry over, at the price you pay today. The App or Pilot Shell’s updater moves you over automatically. Pilot’s tools and memories stay; ask your agent to remove what you no longer use.</span></div>
+            <div className="pr-hi" style={hue("build")}><b><KeyRound size={16} aria-hidden="true" />Activate once</b><span>Paste your key in the App on first start, or run <span className="pr-code">qualitylayer licence activate &lt;key&gt;</span>. Manage invoices, seats and payment in <Link to="/billing">your billing account</Link>.</span></div>
+            <div className="pr-hi" style={hue("verify")}><b><WifiOff size={16} aria-hidden="true" />Works offline</b><span>The licence is checked once a day. Without a connection, a paid licence works for up to {OFFLINE_DAYS} days after its last successful check.</span></div>
+            <div className="pr-hi" style={hue("plan")}><b><ArrowRightLeft size={16} aria-hidden="true" />Coming from Pilot Shell</b><span>Your subscription and your plans carry over, at the price you pay today. The App or Pilot Shell’s updater moves you over automatically. Pilot’s tools and memories stay; ask your agent to remove what you no longer use.</span></div>
           </div>
         </div>
       </section>

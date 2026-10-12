@@ -13,7 +13,8 @@ describe("installation and build instructions", () => {
   });
   it("puts native Windows PowerShell installation with the App and WSL with Linux", () => {
     const install = doc("install.md");
-    const [desktop, headless] = install.split("## Without a screen");
+    const [desktop, rest] = install.split("## Without a screen");
+    const headless = rest.split("\n## ")[0];
     expect(desktop).toContain("irm https://qualitylayer.dev/install.ps1 | iex");
     expect(desktop).toContain("This installs the App and the command line");
     expect(headless).toContain("curl -fsSL https://qualitylayer.dev/install.sh | bash");
@@ -25,7 +26,7 @@ describe("installation and build instructions", () => {
     const implement = doc("steps/implement.md");
     expect(implement).toMatch(/login, a secret/);
     expect(implement).toContain("Set it in your own environment");
-    expect(implement).toContain("Done, it’s set");
+    expect(implement).toContain("It's set");
     expect(implement).toContain("Other slices keep building");
     expect(implement).toContain("the agent waits for that need to be resolved");
     expect(implement).not.toMatch(/never stops to wait|Nothing waits for you/);

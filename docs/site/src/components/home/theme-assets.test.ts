@@ -28,7 +28,10 @@ describe("illustrations in both themes", () => {
     const markdown = read("README.md");
     const pictures = [...markdown.matchAll(/<picture>([\s\S]*?)<\/picture>/g)];
     expect(pictures.length).toBeGreaterThan(0);
-    expect(markdown.replace(/<picture>[\s\S]*?<\/picture>/g, "")).not.toMatch(/<img\b/);
+    // The film's poster is a frame of the film, the same in both themes; every other image is a light/dark pair.
+    const poster = /<img src="docs\/img\/film-poster\.webp"[^>]*>/;
+    expect(markdown, "README film poster").toMatch(poster);
+    expect(markdown.replace(/<picture>[\s\S]*?<\/picture>/g, "").replace(poster, "")).not.toMatch(/<img\b/);
     for (const [, picture] of pictures) {
       expect(picture).toContain('(prefers-color-scheme: dark)');
       const source = picture.match(/srcset="([^"]+)"/)?.[1];

@@ -23,11 +23,11 @@ const team = priced("team");
 export const FAQS: Faq[] = [
   faq(
     "Can I use it on my own, or only with a team?",
-    "On your own. One developer goes through every step: Discuss, Research, Plan, Outline, Implement, Verify and Review. A Team plan adds questions to teammates, Slack messages, and reviewing a change together.",
+    "On your own. One developer can run all eight steps, from Discuss to the pull request. A Team plan adds questions to teammates, Slack messages and reviewing a change together.",
   ),
   faq(
     "How is this different from plan mode?",
-    "Plan mode gives you a plan in the chat. QualityLayer gives you one plan with diagrams and a design to comment on. Independent questions come in batches in Your turn. Answer in any order; each answer reaches your agent immediately, while it keeps working on the rest. It builds the plan test first, and agents that did not write the code check the result.",
+    "Plan mode gives you a plan in the chat. In QualityLayer, questions arrive together as a batch in Your turn; answer in any order, and each answer reaches your agent immediately. You then read one plan with diagrams and designs to comment on, and approve it before any code is written. Your agent builds it test first, and agents that did not write the code check the result.",
   ),
   faq(
     "What about small changes and bugs?",
@@ -35,7 +35,7 @@ export const FAQS: Faq[] = [
   ),
   faq(
     "Is it for product managers as well as engineers?",
-    "Yes. Pick Product or Engineering at Setup, and change it any time in Settings › Workflow. With Product, a new feature starts as a product brief. Discuss settles the problem, how success is measured and the first release before it asks what the user sees, and the Plan reads in product words with the engineering sections folded away. With Engineering, the seven steps read as they always did. The task header names each task's level and switches how one task reads on your computer.",
+    "Yes. Choose Product or Engineering at Setup, and change it any time in Settings › Workflow. With Product, a task starts as a product brief: Discuss settles the problem, how success is measured and the first release, and the plan reads in product words with the engineering detail folded away. With Engineering, a task starts with the full technical plan. The task header shows each task's level and switches it for that one task.",
   ),
   faq(
     "What does it cost to run?",
@@ -70,7 +70,7 @@ export const PRICING_FAQS: Faq[] = [
   ),
   faq(
     "Which agents does it work with?",
-    "Claude Code and Codex, in the terminal, their desktop apps or your IDE; the App sets both up for you. For another coding agent, the App copies a prompt you can hand it. The other coding agent also reads your plan, and risky changes, which needs both Claude Code and Codex.",
+    "Claude Code and Codex, in the terminal, their desktop apps or your IDE; the App sets both up for you. For another coding agent, the App copies a prompt you can hand it. With both Claude Code and Codex installed, the other agent also reviews your plan and any risky change.",
   ),
   faq(
     "Who needs a seat?",
@@ -82,7 +82,7 @@ export const PRICING_FAQS: Faq[] = [
   ),
   faq(
     "What does Enterprise include?",
-    "Enterprise is built with you when your company asks for it, for 20 developers or more: hosting in your own cloud or on-premise, volume pricing, single sign-on, invoicing and custom terms. Write to us and we will scope it together.",
+    "Enterprise is for companies with 20 developers or more. It can include hosting in your own cloud or on-premise, volume pricing, single sign-on, invoicing and custom terms. Write to us and we will scope it together.",
   ),
   faq(
     "I use Pilot Shell 11. What happens?",

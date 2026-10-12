@@ -1,36 +1,111 @@
+/* The home page's steps and extras (ed- classes): one item in focus at a time. Wide screens pin the
+   screenshot beside the text and cross-fade it; tablets and phones put each screenshot under its
+   item and pin the numbered rail under the header. Step colours follow the App: amber when you
+   decide, blue when agents work, violet when agents check. */
 .ed-section{padding-top:clamp(80px,9cqi,120px)}
-.ed-head{max-width:44rem;margin-bottom:48px}
+.ed-head{max-width:44rem;margin-bottom:clamp(24px,4cqi,56px)}
 .ed-head h2{margin:0;font-size:clamp(30px,3.4cqi,44px);line-height:1.1;font-weight:500;letter-spacing:-.035em;text-wrap:balance}
-.ed-head p{margin:18px 0 0;max-width:38rem;font-size:16.5px;line-height:1.6;color:var(--mx-ink2)}
-.ed-shot{min-width:0;margin:0}
-.ed-image-open{position:relative;display:block;width:100%;padding:0;border:1px solid var(--mx-line2);border-radius:6px;background:var(--mx-panel);cursor:zoom-in;overflow:hidden;transition:transform .18s ease-out,border-color .18s ease-out}
-.ed-image-open:hover{transform:translateY(-2px);border-color:var(--mx-ink)}
-.ed-image-open img{display:block;width:100%;height:auto;aspect-ratio:3/2;object-fit:contain;filter:grayscale(1)}
-.ed-shot figcaption{margin-top:12px;font-size:13px;line-height:1.6;color:var(--mx-ink2)}
+.ed-head p{margin:18px 0 0;max-width:38rem;font-size:16.5px;line-height:1.6;color:var(--mx-ink2);text-wrap:pretty}
+
+/* Who acts: one hue per role, a fill and the ink that reads on it, in both themes */
+[data-who="you"]{--hue:var(--ql-amber);--on:#1d1400}
+[data-who="agent"]{--hue:var(--ql-accent);--on:var(--ql-text-on-accent)}
+[data-who="check"]{--hue:var(--ql-check);--on:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) [data-who="check"]{--on:#0a0a0a}}
+:root[data-theme="dark"] [data-who="check"]{--on:#0a0a0a}
+.ed-dot{flex:none;width:8px;height:8px;border-radius:50%;background:var(--hue)}
+.ed-legend{display:flex;flex-wrap:wrap;gap:8px 20px;margin:20px 0 0;padding:0;list-style:none;font-size:13.5px;color:var(--mx-ink2)}
+.ed-legend li{display:inline-flex;align-items:center;gap:8px}
+.ed-num{flex:none;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--hue);color:var(--on);font:600 13px/1 Geist,system-ui,sans-serif;font-variant-numeric:tabular-nums}
+
+/* The two columns: items on the left, the pinned stage on the right */
+.ed-scroll{display:grid;grid-template-columns:minmax(260px,.6fr) minmax(0,1.6fr);gap:clamp(28px,4cqi,64px)}
+.ed-items{min-width:0}
+.ed-item{min-height:62vh;display:flex;flex-direction:column;justify-content:center;padding:24px 0;scroll-margin-top:84px;transition:opacity .45s var(--ql-ease)}
+.ed-item:first-child{min-height:44vh;justify-content:flex-start;padding-top:4vh}
+.ed-item:last-child{min-height:calc(100vh - 60px)}
+.ed-item:not(.on){opacity:.32}
+.ed-item h3{display:flex;align-items:center;gap:12px;margin:0;font-size:clamp(26px,2.6cqi,34px);line-height:1.15;font-weight:500;letter-spacing:-.03em}
+.ed-item h3 .mx-tile{width:36px;height:36px}
+.ed-line{margin:14px 0 0;font-size:18px;line-height:1.45;font-weight:500;color:var(--mx-ink)}
+.ed-text{margin:10px 0 0;max-width:30rem;font-size:16px;line-height:1.6;color:var(--mx-ink2);text-wrap:pretty}
+.ed-who{display:inline-flex;align-items:center;gap:8px;margin:18px 0 0;font-size:13px;color:var(--mx-ink2)}
+.ed-link{display:inline-flex;align-items:center;min-height:44px;margin-top:8px;font-size:14px}
+
+.ed-stage{position:relative;min-width:0;margin-right:calc(-1 * clamp(0px,(100cqi - 1240px) / 2,120px))}
+.ed-pin{position:sticky;top:60px;height:calc(100vh - 60px);display:flex;flex-direction:column;justify-content:center;gap:28px}
+
+/* The rail: eight numbered steps on one line; the line behind them fills up to the step in view */
+.ed-rail{position:relative;display:grid;grid-template-columns:repeat(8,minmax(0,1fr));margin:0;padding:0;list-style:none}
+.ed-rail:before,.ed-rail:after{content:"";position:absolute;top:14px;left:6.25%;right:6.25%;height:2px;border-radius:2px;background:var(--mx-line2)}
+.ed-rail:after{background:var(--mx-ink);transform-origin:left;transform:scaleX(var(--done,0));transition:transform .5s var(--ql-ease)}
+.ed-rail li{position:relative;z-index:1;display:flex;justify-content:center}
+.ed-rail-step{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:0;padding:0 2px;border:0;background:none;color:var(--mx-ink2);font:500 12.5px/1.2 Geist,system-ui,sans-serif;cursor:pointer}
+.ed-rail-step:after{content:"";position:absolute;inset:-8px -4px}
+.ed-rail-step .ed-num{box-shadow:0 0 0 4px var(--mx-page);transition:background-color .3s var(--ql-ease),color .3s var(--ql-ease),transform .3s var(--ql-ease)}
+.ed-rail-step[data-state="next"] .ed-num{background:var(--mx-panel);color:var(--mx-ink2);box-shadow:0 0 0 4px var(--mx-page),inset 0 0 0 1.5px var(--mx-line2)}
+.ed-rail-step[data-state="on"] .ed-num{transform:scale(1.14)}
+.ed-rail-step[data-state="on"]{color:var(--mx-ink)}
+.ed-rail-step:hover{color:var(--mx-ink)}
+.ed-rail-name{max-width:100%;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* The screenshot frame: every image stacked, the one in view fades and rises into place */
+.ed-frame{position:relative;display:block;width:100%;aspect-ratio:3/2;padding:0;border:1px solid var(--mx-line2);border-radius:8px;background:var(--mx-panel);box-shadow:var(--mx-shadow);cursor:zoom-in;overflow:hidden}
+.ed-frame img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;opacity:0;transform:translateY(14px) scale(.985);transition:opacity .5s var(--ql-ease),transform .7s cubic-bezier(.16,1,.3,1)}
+.ed-frame img.on{opacity:1;transform:none}
+.ed-frame:focus-visible{outline:2px solid var(--ql-accent);outline-offset:3px}
+.ed-frame.ed-inline{margin:20px 0 4px;box-shadow:none}
+.ed-frame.ed-inline img{position:static;opacity:1;transform:none}
+.ed-frame.ed-inline picture{display:block}
+.ed-enlarge{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:4px 8px;background:var(--mx-panel);color:var(--mx-ink);border:1px solid var(--mx-line2);border-radius:4px;font:500 12px Geist,system-ui;opacity:0;transform:translateY(2px);transition:opacity .16s ease-out,transform .16s ease-out}
+.ed-frame:hover .ed-enlarge,.ed-frame:focus-visible .ed-enlarge{opacity:1;transform:none}
+@media(hover:none){.ed-enlarge{opacity:1;transform:none}}
+
 .ed-outcome{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;margin-top:48px;padding:24px 0;border-bottom:1px solid var(--mx-line);font-size:15px}
 .ed-outcome p{margin:0;max-width:50ch;color:var(--mx-ink2)}
 .ed-outcome>div{display:flex;flex-wrap:wrap;gap:12px 24px}
 .ed-outcome a{display:inline-flex;align-items:center;min-height:44px}
-.ed-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 64px}
-.ed-features article{min-width:0;scroll-margin-top:90px;border-top:1px solid var(--mx-line2);padding-top:22px}
-.ed-features h3{margin:0 0 12px;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.02em;text-wrap:balance}
-.ed-features article>p{margin:0 0 24px;font-size:15px;line-height:1.6;color:var(--mx-ink2);max-width:47ch}
-.ed-features article>a{display:inline-flex;align-items:center;min-height:44px;margin-top:12px;font-size:14px}
+
+/* The enlarged screenshot */
 .ed-image-dialog{width:min(1440px,calc(100vw - 32px));max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);margin:auto;padding:16px;border:0;border-radius:8px;background:var(--mx-panel);color:var(--mx-ink);overflow:auto}
 .ed-image-dialog::backdrop{background:rgb(0 0 0 / 70%)}
 .ed-dialog-header{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:12px}
 .ed-dialog-header h2{flex:1;min-width:0}
 .ed-dialog-header button{flex:none}
-.ed-image-dialog img{display:block;width:100%;height:auto;max-height:calc(100dvh - 160px);object-fit:contain;filter:grayscale(1)}
+.ed-image-dialog img{display:block;width:100%;height:auto;max-height:calc(100dvh - 160px);object-fit:contain}
 .ed-image-dialog>p{margin:12px 0 0;font-size:12px;line-height:1.6;color:var(--mx-ink2)}
-@container(max-width:720px){.ed-head{margin-bottom:32px}.ed-features{grid-template-columns:minmax(0,1fr);gap:40px}}
+
+/* Tablets and phones: one column, each screenshot under its item, the rail pinned under the header */
+@container (max-width:1079px){
+  .ed-scroll{display:block}
+  .ed-item,.ed-item:first-child,.ed-item:last-child{min-height:0;padding:40px 0 8px;scroll-margin-top:136px}
+  .ed-item:first-child{padding-top:16px}
+  .ed-item:not(.on){opacity:1}
+  .ed-text{max-width:44rem}
+  .ed-rail-pin{position:sticky;top:60px;z-index:5;margin:0 calc(-1 * clamp(16px,3cqi,40px));padding:12px clamp(16px,3cqi,40px) 10px;background:color-mix(in srgb,var(--mx-page) 90%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--mx-line)}
+  .ed-rail-pin .ed-rail-step .ed-num{box-shadow:none}
+  .ed-rail-pin .ed-rail-step[data-state="next"] .ed-num{box-shadow:inset 0 0 0 1.5px var(--mx-line2)}
+}
+@container (max-width:640px){
+  /* Phones show the App's phone layout: a portrait picture, narrower so a step still fits on screen. */
+  .ed-frame.ed-inline{width:min(100%,330px);margin:20px auto 4px;aspect-ratio:auto;border-radius:12px}
+  .ed-rail-name{display:none}
+  .ed-rail-step{gap:0}
+  .ed-item h3{font-size:26px}
+  .ed-line{font-size:17px}
+  .ed-text{font-size:15.5px}
+}
 @media(max-width:480px){.ed-image-dialog{padding:12px;width:calc(100vw - 24px);max-width:calc(100vw - 24px)}}
 
-.ed-phase+.ed-phase{margin-top:80px;padding-top:56px;border-top:1px solid var(--mx-line)}
-.ed-phase>h3{margin:0;font-size:clamp(25px,2.6cqi,34px);line-height:1.2;font-weight:500;letter-spacing:-.03em;text-wrap:balance}
-.ed-phase-lead{max-width:60ch;margin:16px 0 32px;font-size:15.5px;line-height:1.6;color:var(--mx-ink2)}
-.ed-workflow-grid h4{margin:0 0 8px;font-size:22px;line-height:1.3;font-weight:500;letter-spacing:-.02em}
-.ed-step-info{margin-top:12px}.ed-step-info [data-slot="accordion-item"]{border:0}.ed-step-info [data-slot="accordion-trigger"]{min-height:44px;padding:8px 0;font-size:13px}.ed-step-info p{margin:0;line-height:1.65;color:var(--mx-ink2)}
-.ed-enlarge{position:absolute;right:8px;bottom:8px;display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:4px 8px;background:var(--mx-panel);color:var(--mx-ink);border:1px solid var(--mx-line2);border-radius:4px;font:500 12px Geist,system-ui;opacity:0;transform:translateY(2px);transition:opacity .16s ease-out,transform .16s ease-out}.ed-image-open:hover .ed-enlarge,.ed-image-open:focus-visible .ed-enlarge{opacity:1;transform:none}
-@media(hover:none){.ed-enlarge{opacity:1;transform:none}}
-@media(prefers-reduced-motion:reduce){.ed-image-open,.ed-enlarge{transition:none;transform:none!important}[data-slot="dialog-content"],[data-slot="dialog-overlay"],[data-slot="accordion-content"]{animation:none!important;transition:none!important}}
+/* Phones: each screenshot rises into place as it scrolls in. Without scroll-driven animations it simply shows. */
+@keyframes ed-rise{entry 0%{opacity:0;transform:translateY(32px) scale(.97)}entry 60%{opacity:1;transform:none}}
+@supports (animation-timeline: view()){
+  @media (prefers-reduced-motion:no-preference){
+    .ed-frame.ed-inline{animation:ed-rise linear both;animation-timeline:view(block 120px 0px);transform-origin:50% 100%}
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .ed-item,.ed-frame img,.ed-rail:after,.ed-rail-step .ed-num,.ed-enlarge{transition:none}
+  .ed-frame img{transform:none!important}
+  [data-slot="dialog-content"],[data-slot="dialog-overlay"]{animation:none!important;transition:none!important}
+}

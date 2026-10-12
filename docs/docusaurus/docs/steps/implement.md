@@ -3,50 +3,52 @@ title: Implement
 description: One command starts the build. From there your agent works on its own until the final review, in small slices, each tested.
 ---
 
-![The seven steps, with Implement highlighted](pathname:///img/diagrams/track-implement-light.svg)
-![The seven steps, with Implement highlighted](pathname:///img/diagrams/track-implement-dark.svg)
+![The eight steps, with Implement highlighted](pathname:///img/diagrams/track-implement-light.svg)
+![The eight steps, with Implement highlighted](pathname:///img/diagrams/track-implement-dark.svg)
 
 ## Start Implement {#start-implement}
 
-When you approve the Plan, the [Outline](outline.md) is finished and Implement opens with your [Build defaults](../reference/settings.md#defaults). It shows the orchestrator, which plans each slice and reads each report, and the workers, which write the code. The orchestrator writes no code. One effort applies to both.
+Once you approve the Plan, Implement shows the one command that starts the build, with your defaults from [Settings](../reference/settings.md#defaults). Copy it into a terminal, your IDE or a desktop app. The build works from the approved Plan, never from your planning chat.
 
-![Implement Start: Build with Claude Code, Codex or another agent; the orchestrator and its workers with their models; one effort for both; and the command to copy, with the lines to type first in the session that planned the task](pathname:///img/diagrams/implement-start-light.svg)
-![Implement Start: Build with Claude Code, Codex or another agent; the orchestrator and its workers with their models; one effort for both; and the command to copy, with the lines to type first in the session that planned the task](pathname:///img/diagrams/implement-start-dark.svg)
+![Implement Start in the App: Build with Claude Code, Codex or another agent, the model and effort in one line, the branch the build lands on, and the lines to type with a Copy button each](pathname:///img/app/implement-start-light.webp)
+![Implement Start in the App: Build with Claude Code, Codex or another agent, the model and effort in one line, the branch the build lands on, and the lines to type with a Copy button each](pathname:///img/app/implement-start-dark.webp)
 
-- **Build with** Claude Code, Codex or another agent; another agent gets one prompt to paste.
-- **Change anything** for this build only, the workers' model included. **Reset** brings your defaults back.
-- **Where it starts:** by default in the session that planned the task. Implement Start then lists the lines to type first (`/clear`, `/model`, `/effort`), each with its own copy button. It can also start a new session or a new worktree.
+*Example task in a fictional project.*
 
-Copy the command into a terminal, your IDE or a desktop app. The build starts from the approved Plan, never from your planning chat.
+| On the card | What it picks |
+| --- | --- |
+| **Build with** | Claude Code, Codex or another agent (one prompt to paste) |
+| **Orchestrator** | The model that hands out slices and reads each report; it writes no code. A small Plan builds in one session, and this reads **Builder** |
+| **Workers** | The model that writes the code, one slice each. **No subagents** keeps it all in one session |
+| **Effort for both** | One effort for the session and every worker |
+| **Runs as** | A plain prompt, or **Goal** where your agent has a keep-going mode |
+| **Start in** | **This session** (the default: the card lists `/clear`, `/model`, `/effort` to type first), **New session** or **New worktree** |
+| **Hand to the team** | A teammate builds it instead ([Hand over](../team/plans.md#hand-over)) |
+
+**Change** sets any of these for this build only.
 
 ### Where the build lands {#where-it-lands}
 
-Below your defaults, a **Lands on** row names the branch you have checked out and the branch a pull request will go into, the main line of your repository. It offers two choices: **Stay on** your branch, or **Start on a new branch** named `ql/` and the task's name. Nothing changes until you pick: choosing the new branch creates it in your checkout at that click, and the commands below follow.
-
-- **On your main branch** the row turns amber. A pull request cannot be opened from the branch it goes into, so at the [approval](review.md#approve) **Approve and open a pull request** says so instead of pushing your main branch. The new branch is recommended, and `git switch -c ql/<task>` shows first among the commands if you would rather run it yourself.
-- **If git refuses** the new branch, for example because the name exists, the card shows git's reason and keeps that command for you to run.
-- **A new worktree** keeps its own branch, and the row says so.
-
-You can do the same from a terminal with `qualitylayer branch new`, or `qualitylayer branch new <name>` for a name of your own. QualityLayer creates a branch only when you ask, and never merges or pushes one.
+**Lands on** names your checked-out branch and the branch the pull request goes into. Choose **Stay on**, or **Start on a new branch** named `ql/<task>`; nothing changes until you pick. On your main branch the row turns amber, since a pull request cannot come from the branch it goes into. From a terminal, `qualitylayer branch new [name]` does the same. QualityLayer never merges or pushes a branch on its own.
 
 ## While agents build
 
-From the command on, your agent builds and checks the approved Plan through to the final review. You can still write to it at any time, for example to add something to the Plan.
+![Implement in the App: the slices with their task cards and progress, while the build runs](pathname:///img/app/implement-light.webp)
+![Implement in the App: the slices with their task cards and progress, while the build runs](pathname:///img/app/implement-dark.webp)
 
-![Implement: a login waits in Your turn while another slice keeps building; the live status names the slice, and the document records the build and its checks](pathname:///img/diagrams/implement-light.svg)
-![Implement: a login waits in Your turn while another slice keeps building; the live status names the slice, and the document records the build and its checks](pathname:///img/diagrams/implement-dark.svg)
+*Example task in a fictional project.*
 
-- **Vertical slices,** as the [Outline](outline.md) cut them. Each slice works end to end and is tested on its own, test first. Slices that share no files build side by side.
-- **An orchestrator with a fresh context** hands out the slices and takes the hard problems; the routine work runs on a cheaper, faster model.
-- **Checks are recorded by QualityLayer,** not reported by the agent.
-- **The agent handles routine decisions.** When something does not go as planned, it takes the recommended way and lists it under **Decided while building**, where you can **Ask why**.
+The **Build** page shows the slices, changed files and checks as they happen. Each slice is written test first, and slices that share no files build side by side. QualityLayer runs and records every check itself, so you never rely on the agent's word for a result.
 
-If the build needs a login, a secret or something only you can provide, **Your turn** names the slice that needs it. Set it in your own environment, then press **Done, it’s set**. The App never takes the secret itself. Other slices keep building; when no other work remains, the agent waits for that need to be resolved. When nothing waits for you, the agent's turn shows what is being built.
+Your agent does not stop to ask. When something does not go as planned, it takes the recommended way and lists it under **Decided while building**, where you can **Ask why**. The one exception is something only you can give, such as a login, a secret or access only you hold: **Your turn** names the slice that needs it. Set it in your own environment and press **It's set**; the App never takes the secret. Other slices keep building; when no other work remains, the agent waits for that need to be resolved.
 
-Implement opens on **Build**, with the slices, changed files and checks as they happen. You can comment on any slice while it builds; the agent reads comments after each task. QualityLayer also keeps `05-implement.md` current from the build's records: the slices and their state, every recorded check, and what was decided while building. Open that document from **Files** when you want the complete written record, including each checkpoint and every deviation; it is not another Implement tab.
+Comment on any slice while it builds, or write to your agent at any time. The full record, `05-implement.md`, is in **Files**.
 
 ## Checkpoints {#checkpoints}
 
-A slice the Plan marks risky gets a checkpoint: its scenarios run on the real program before the build goes on. A checkpoint that keeps failing is noted for the final review; it never stops the build.
+![A checkpoint after a risky slice: its scenarios run on the real program, a failure goes to an agent to fix and runs again, and after four failed runs it is recorded as open while the build goes on](pathname:///img/diagrams/checkpoint-light.svg)
+![A checkpoint after a risky slice: its scenarios run on the real program, a failure goes to an agent to fix and runs again, and after four failed runs it is recorded as open while the build goes on](pathname:///img/diagrams/checkpoint-dark.svg)
+
+After a slice the Plan marks risky, its scenarios run on the real program. A failure goes to an agent to fix; after four failed runs it is noted for the final review and the build goes on.
 
 When the last slice is built, [Verify](verify.md) starts by itself.

@@ -1,4 +1,6 @@
 /** Under the hero: the agents QualityLayer works with, what it adds, and the models you already pay for. */
+import type { LucideIcon } from "lucide-react";
+import { ArrowRight, BadgeCheck, FileText, KeyRound, Laptop, LockKeyhole, SquareTerminal, Users, Workflow } from "lucide-react";
 
 type Chip = [label: string, icon: string];
 
@@ -29,11 +31,20 @@ const SETUPS: Chip[] = [
   ["Or one agent does every step", "term"],
 ];
 
-const PRINCIPLES = [
-  ["Your agent", "The tools you already trust", "Claude Code or Codex writes the code in its own terminal, app or editor, on your subscription."],
-  ["One plan", "Approved by you before any code", "Every decision shown as it will look: a clickable mockup and a diagram you can comment on."],
-  ["Proof", "Checked by agents that did not write it", "Every test run recorded, every point of Done means checked, and the proof one click away."],
-] as const;
+/** Each card in the App's colours: blue for the agent's work, amber for your decision, violet for what agents checked. */
+const PRINCIPLES: { who: "agent" | "you" | "check"; icon: LucideIcon; title: string; lead: string; text: string }[] = [
+  { who: "agent", icon: SquareTerminal, title: "Your agent", lead: "The tools you already trust", text: "Claude Code or Codex writes the code in its own terminal, app or editor, on your subscription." },
+  { who: "you", icon: Workflow, title: "One plan", lead: "Approved by you before any code", text: "See each decision as a diagram and each screen as a clickable mockup, and comment on any part." },
+  { who: "check", icon: BadgeCheck, title: "Proof", lead: "Checked by agents that did not write it", text: "Every test run is recorded, every point you agreed is checked, and the proof is one click away." },
+];
+
+/** From where you work to the files you keep: what QualityLayer connects, all inside one dashed frame, your computer. */
+const CHAIN: { icon: LucideIcon | "mark"; title: string; text: string; chips: string[]; ql?: true }[] = [
+  { icon: SquareTerminal, title: "Where you work", text: "Keep the tools you use today.", chips: ["Terminal", "Desktop app", "VS Code", "JetBrains"] },
+  { icon: KeyRound, title: "Your agent, your subscription", text: "On the plan or API key you already pay for.", chips: ["Claude Code", "Codex"] },
+  { icon: "mark", title: "QualityLayer", text: "A command line your agent calls, and the App where you decide.", chips: ["Command line", "The App"], ql: true },
+  { icon: FileText, title: "Your repository", text: "Every step is a Markdown file you can read, diff and commit.", chips: ["Plan", "Decisions", "Test runs"] },
+];
 
 const Icon = ({ name }: { name: string }) => <i className={`mx-ic mx-i-${name}`} aria-hidden="true" />;
 
@@ -68,8 +79,9 @@ export default function Intro() {
             <p className="mx-lead">QualityLayer holds the workflow, so your agent never skips a step. You see only what needs a person.</p>
           </div>
           <div className="mx-pr3">
-            {PRINCIPLES.map(([title, lead, text]) => (
-              <div key={title} className="mx-pr">
+            {PRINCIPLES.map(({ who, icon: Glyph, title, lead, text }) => (
+              <div key={title} className="mx-pr" data-who={who}>
+                <span className="mx-tile" aria-hidden="true"><Glyph size={20} strokeWidth={1.75} /></span>
                 <h3>{title}</h3>
                 <b>{lead}</b>
                 <p>{text}</p>
@@ -79,11 +91,37 @@ export default function Intro() {
         </div>
       </section>
 
+      <section id="local" className="mx-wrap mx-sec" aria-labelledby="local-h">
+        <div className="mx-head c">
+          <h2 id="local-h" className="mx-h2">Runs on your computer, with what you already have</h2>
+          <p className="mx-lead">Keep your agent, your editor and your model plan. QualityLayer connects to them, with nothing else to install or host.</p>
+        </div>
+        <div className="mx-local">
+          <span className="mx-local-tag"><Laptop size={15} strokeWidth={1.75} aria-hidden="true" />Your computer</span>
+          <ol className="mx-chain">
+            {CHAIN.map(({ icon: Glyph, title, text, chips, ql }, i) => (
+              <li key={title} className={ql ? "ql" : undefined}>
+                <span className="mx-tile" aria-hidden="true">{Glyph === "mark" ? <span className="mx-tile-mark" /> : <Glyph size={20} strokeWidth={1.75} />}</span>
+                <b>{title}</b>
+                <span className="mx-chain-text">{text}</span>
+                <span className="mx-chain-chips">{chips.map((chip) => <span key={chip}>{chip}</span>)}</span>
+                {i < CHAIN.length - 1 ? <span className="mx-chain-arrow" aria-hidden="true"><ArrowRight size={14} strokeWidth={2} /></span> : null}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="mx-share">
+          <span className="mx-tile" aria-hidden="true"><LockKeyhole size={20} strokeWidth={1.75} /></span>
+          <p><b>Shared only when you choose.</b> Share a task with your team and it is encrypted on your computer before it leaves. Your code is never sent.</p>
+          <span className="mx-share-to" aria-hidden="true"><Users size={15} strokeWidth={1.75} />Your team</span>
+        </div>
+      </section>
+
       <section className="mx-wrap mx-sec" aria-labelledby="mod-h">
         <div className="mx-mq">
           <div className="mx-mqt">
             <h2 id="mod-h" className="mx-h3">Use the models you already pay for</h2>
-            <p>Choose which model writes the code and which one checks it, in Claude Code and Codex. The other coding agent also reads your plan, and risky changes.</p>
+            <p>Choose which model writes the code and which one checks it, in Claude Code and Codex. With both installed, the other coding agent also reviews your plan and any risky change.</p>
           </div>
           <div className="mx-mqr">
             <p className="w7-sr">Models: {MODELS.filter(([, icon]) => icon === "cpu").map(([label]) => label).join(", ")}, through Claude Code and Codex. {SETUPS.map(([label]) => label).join(". ")}.</p>

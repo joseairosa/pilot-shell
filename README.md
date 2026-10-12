@@ -29,9 +29,14 @@ You approve one plan before any code is written. Your agent builds it test first
   <img src="https://img.shields.io/badge/PRs-welcome-2076C5.svg?labelColor=555555" alt="PRs Welcome">
 </picture></a>
 
+<a href="https://qualitylayer-media.max-ritter.workers.dev/overview.mp4"><img src="docs/img/film-poster.webp" alt="Play the film: How QualityLayer works, 5 minutes" width="880"></a>
+
+<sub>Watch <a href="https://qualitylayer-media.max-ritter.workers.dev/overview.mp4">How QualityLayer works</a> · 5 minutes</sub>
+
 <p>
   <a href="#install">Install</a> •
   <a href="#why">Why</a> •
+  <a href="#local">Local first</a> •
   <a href="#how">How it works</a> •
   <a href="#team">Teams</a> •
   <a href="https://qualitylayer.dev/docs/">Docs</a> •
@@ -45,7 +50,7 @@ You approve one plan before any code is written. Your agent builds it test first
 curl -fsSL https://qualitylayer.dev/install.sh | bash
 ```
 
-**For Claude Code and Codex · terminal, desktop app or IDE · 7-day trial**
+**For Claude Code and Codex · terminal, desktop app or IDE · your own subscription · 7-day trial**
 
 </div>
 
@@ -67,6 +72,29 @@ curl -fsSL https://qualitylayer.dev/install.sh | bash
 - You see the time and estimated cost of every step, and teammates can comment while the plan is still cheap to change.
 
 QualityLayer is for medium and large changes. When a request turns out too small for a plan, your agent closes the task with a ready prompt for the plain agent.
+
+---
+
+<h2 id="local">Runs on what you already have</h2>
+
+QualityLayer is a command line your coding agent calls, plus the QualityLayer App on your computer. There is nothing else to host and no new place for your code.
+
+- **Where you work.** Keep working in the terminal, the Claude Code or Codex desktop app, VS Code or JetBrains. QualityLayer connects to the agent you already run there.
+- **Your subscription.** Your agents run on the Claude or ChatGPT plan, or the API key, that you pay for today. QualityLayer charges only for itself, never for model usage.
+- **Your files.** Every step writes one Markdown file in your repository, so you can read, diff and commit the plan, its decisions and the test records. The App reads the same files.
+- **Private by default.** QualityLayer never sends your code and sends no usage events. Share a task with your team and it is encrypted on your computer before it leaves.
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/docusaurus/static/img/diagrams/architecture-dark.svg">
+  <img src="docs/docusaurus/static/img/diagrams/architecture-light.svg" alt="On your computer, your agent calls the QualityLayer CLI, which keeps each task in Markdown files in your repository, and the QualityLayer App reads the same files. Only when you share does a plan go to the QualityLayer server, encrypted, for your team and for link guests" width="1000">
+</picture>
+
+<details>
+<summary><b>What leaves your computer</b></summary>
+
+Your coding agent talks to its model provider exactly as it does today. QualityLayer itself contacts its server only for your licence, the workflow texts your agent follows and updates. Optional sharing encrypts the shared documents and comments on your computer before sending them; your code, diff and interactive design pages stay local. See [files and privacy](https://qualitylayer.dev/docs/reference/files#privacy).
+
+</details>
 
 ---
 
@@ -118,24 +146,17 @@ After you approve, Implement shows one command that starts the build in a fresh 
 
 QualityLayer runs only when you ask for it: with `/ql` (`$ql` in Codex), `/ql implement`, or a request to resume a named task. Everything else works as before.
 
-<details>
-<summary><b>Privacy</b></summary>
-
-Plans are files in your repository, and the App runs on your computer. QualityLayer sends no usage events. It contacts QualityLayer for your licence, the workflow texts your agent follows and updates. Optional sharing encrypts the shared documents and comments on your computer before sending them; your code, diff and interactive design pages stay local. See [files and privacy](https://qualitylayer.dev/docs/reference/files#privacy).
-
-</details>
-
 ---
 
 <h2 id="how">How it works</h2>
 
-### Seven steps from request to pull request
+### Eight steps from request to pull request
 
-Every task takes the same seven steps, and each writes one Markdown file in the task's folder. You approve twice: the plan before any code, and the finished change. QualityLayer works on the branch you have checked out and never switches it.
+Every task takes the same eight steps, in order. The first seven each write one Markdown file in the task's folder; the last follows the pull request until you merge it. You approve twice: the plan before any code, and the finished change. QualityLayer works on the branch you have checked out and never switches it.
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="docs/docusaurus/static/img/diagrams/flow-dark.svg">
-  <img src="docs/docusaurus/static/img/diagrams/flow-light.svg" alt="Discuss, Research, Plan, Outline, Implement, Verify, Review: you approve at Plan and at Review; your agent works in between" width="1000">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/docusaurus/static/img/diagrams/flow-pr-dark.svg">
+  <img src="docs/docusaurus/static/img/diagrams/flow-pr-light.svg" alt="Discuss, Research, Plan, Outline, Implement, Verify, Review and the pull request: you approve at Plan and at Review and merge the pull request; your agent works in between" width="1000">
 </picture>
 
 **Agree on the plan.** In Discuss you settle what done means; a bug is reproduced first. Agents research the code, and the Plan shows the design, diagrams and checks with room for comments. Another agent reviews it before you read it. Outline then cuts it into slices, with nothing for you to approve.
@@ -146,7 +167,7 @@ Every task takes the same seven steps, and each writes one Markdown file in the 
 </picture>
 <sub>Example task in a fictional project: usage-based billing across nine services.</sub>
 
-**Build and prove it.** Workers build slice by slice, each starting with a failing test. In Verify, agents that did not write the code check every point of your request, and a live checklist keeps each point next to its evidence. Review walks you through the change before the pull request opens, and the task stays open until it is merged.
+**Build and prove it.** Your agent builds slice by slice, each starting with a failing test. In Verify, agents that did not write the code check every point of your request, and a live checklist keeps each point next to its evidence. Review walks you through the change before the pull request opens, and the task stays open until it is merged.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/site/public/product/verify-dark.webp">
@@ -156,11 +177,11 @@ Every task takes the same seven steps, and each writes one Markdown file in the 
 
 ### Two levels
 
-Pick **Product** or **Engineering** at **Setup**, and change it any time in **Settings › Workflow**. The task header shows each task's level and switches it for that one task. Product starts a feature as a product brief, in product words, and folds the engineering sections away. Engineering, the default, keeps every section open. Both take the same seven steps.
+**Engineering**, the default, starts each task from the full technical plan. **Product** starts from a product brief that becomes a PRD, with the engineering detail folded away. Pick one at **Setup**, change it in **Settings › Workflow**, or switch one task from the task header; the steps and checks stay the same. [How the levels differ](https://qualitylayer.dev/docs/#two-levels).
 
 ### Your models, your cost
 
-Choose which agent plans, builds and checks. The App shows each step's time and estimated cost. See [the App guide](https://qualitylayer.dev/docs/app) for the screens and controls.
+Choose which agent and model plans, builds and checks. The App shows each step's time and estimated cost. See [the App guide](https://qualitylayer.dev/docs/app) for the screens and controls.
 
 ---
 
@@ -175,9 +196,9 @@ Claude Code and Codex sessions on your computer can also message each other, to 
 ## Documentation
 
 - [Install](https://qualitylayer.dev/docs/install), [your first task](https://qualitylayer.dev/docs/first-task), [other agents](https://qualitylayer.dev/docs/agents/other) and [moving from Pilot Shell 11](https://qualitylayer.dev/docs/moving-from-pilot-shell)
-- The seven steps: [Discuss](https://qualitylayer.dev/docs/steps/discuss), [Research](https://qualitylayer.dev/docs/steps/research), [Plan](https://qualitylayer.dev/docs/steps/plan), [Outline](https://qualitylayer.dev/docs/steps/outline), [Implement](https://qualitylayer.dev/docs/steps/implement), [Verify](https://qualitylayer.dev/docs/steps/verify), [Review](https://qualitylayer.dev/docs/steps/review)
+- The steps: [Discuss](https://qualitylayer.dev/docs/steps/discuss), [Research](https://qualitylayer.dev/docs/steps/research), [Plan](https://qualitylayer.dev/docs/steps/plan), [Outline](https://qualitylayer.dev/docs/steps/outline), [Implement](https://qualitylayer.dev/docs/steps/implement), [Verify](https://qualitylayer.dev/docs/steps/verify), [Review](https://qualitylayer.dev/docs/steps/review), [Pull request](https://qualitylayer.dev/docs/steps/pull-request)
 - [The App](https://qualitylayer.dev/docs/app), [commands](https://qualitylayer.dev/docs/reference/commands), [settings](https://qualitylayer.dev/docs/reference/settings), and [files and privacy](https://qualitylayer.dev/docs/reference/files)
-- Films and a scroll-through of a whole task on [the website](https://qualitylayer.dev/#films)
+- [The film](https://qualitylayer-media.max-ritter.workers.dev/overview.mp4) and every step with a screenshot on [the website](https://qualitylayer.dev/#tour)
 
 ## Changelog
 
