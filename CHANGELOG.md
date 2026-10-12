@@ -2,6 +2,16 @@
 
 Notable changes to QualityLayer and its predecessor, Pilot Shell.
 
+## 12.0.0-beta.55
+
+### Fixed
+
+- **Show me around** tours an example task, "Deliver webhooks reliably", with
+  its documents and a design to open, under an example name.
+- **Settings › Workflow** looks the same in a browser tab as in the App: the
+  level, then every setting, open. The "This browser" card and the folded
+  section are gone.
+
 ## 12.0.0-beta.54
 
 ### New
