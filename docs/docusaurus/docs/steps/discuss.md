@@ -25,12 +25,13 @@ Describe the change in your own words: **+ New** in the App, or `/ql <request>` 
 
 **Done means** is the numbered list of results you will accept the change by. Verify checks every point. You approve it together with the Plan, and changing it later withdraws that approval.
 
-## Special cases
+## Too small for a plan {#too-small}
 
-| Case | What happens |
-| --- | --- |
-| **Too small for a plan** | One small, clear edit: the App hands you a ready prompt for your plain agent. **Plan it anyway** keeps the full flow |
-| **What to build is still open** | No ticket says what to build, so the document grows into a PRD with the success measure, the first release and what is left out. **Copy** exports it |
+For one small, clear edit, the App hands you a ready prompt for your plain agent. **Plan it anyway** keeps the full flow.
+
+## What to build is still open {#prd}
+
+When no ticket says what to build, the document grows into a PRD with the success measure, the first release and what is left out. **Copy** exports it.
 
 ## A bug {#a-bug}
 
